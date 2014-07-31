@@ -69,7 +69,9 @@ void InstrumentManager::InputBegan()
 
 void InstrumentManager::InputMoved()
 {
-  printf("Mouse moved!\n");
+  int x, y;
+  SDL_GetMouseState(&x, &y);
+  printf("Mouse moved at: %d, %d\n", x, y);
 }
 
 void InstrumentManager::InputEnded()

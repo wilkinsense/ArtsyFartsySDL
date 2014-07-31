@@ -16,8 +16,17 @@ public:
 
   static void InputMoved()
   {
-    InstrumentManager *im = InstrumentManager::GetInstance();
-    im->InputMoved();
+    static int lastX = 0, lastY = 0;
+    int x, y;
+    SDL_GetMouseState(&x, &y);
+
+    if (lastX != x || lastY != y)
+    {
+      InstrumentManager *im = InstrumentManager::GetInstance();
+      im->InputMoved(); 
+      lastX = x;
+      lastY = y;
+    }
   }
 
   static void InputEnded()
