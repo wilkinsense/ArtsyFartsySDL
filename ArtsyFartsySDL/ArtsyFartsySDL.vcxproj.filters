@@ -12,5 +12,37 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\HistoryManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InstrumentManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InstrumentWrapper.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ColorHelper.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HistoryManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InputManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InstrumentManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InstrumentTypes.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InstrumentWrapper.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
