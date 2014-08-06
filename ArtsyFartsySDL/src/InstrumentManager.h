@@ -2,6 +2,7 @@
 #include <SDL_events.h>
 #include "ColorHelper.h"
 #include "InstrumentTypes.h"
+#include <vector>
 
 class Shape;
 
@@ -22,6 +23,8 @@ public:
   void      InputMoved();
   void      InputEnded();
 
+  const std::vector<Shape *>* GetActiveShapes();
+
 private:
   static InstrumentManager *kInstance;
   InstrumentManager();
@@ -31,6 +34,7 @@ private:
   ColorRGBA mBrushColor;
 
   std::vector<Shape *> mShapes;
+  Shape *currentShape;
 
   SDL_EventType mInstrumentState;
 };

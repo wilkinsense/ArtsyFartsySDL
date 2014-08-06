@@ -42,31 +42,45 @@ int main(int argc, char ** argv)
 
   InputManager::GetInstance()->AssignEvent(SDL_MOUSEBUTTONDOWN, (InputEvent)(&InstrumentWrapper::InputBegan));
 
-  //SDL_ShowWindow(window);
+  /* We're only going to clear once before we start since everything we want is going to be
+   * stored in the frame buffer. */
+  SDL_SetRenderDrawColor(renderer, 0xFA, 0xF0, 0x00, 0xFF);
+  SDL_RenderClear(renderer);
+
   bool quit = false;
   while (!quit)
   {
-    //surface = SDL_GetWindowSurface(window);
-    SDL_SetRenderDrawColor(renderer, 0xFA, 0xF0, 0x00, 0xFF);
-    SDL_RenderClear(renderer);
-
-    //SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 0xFA, 0xF0, 0x00));
-    //SDL_RenderSetScale(renderer, 5.0f, 5.0f);
-
-    const std::vector<HistoryBlock *>* activeBlocks = HistoryManager::GetInstance()->GetActiveBlocks();
-    for (int i = 0; i < activeBlocks->size(); i++)
+    const std::vector<Shape *>* shapes = InstrumentManager::GetInstance()->GetActiveShapes();
+    for (auto shapeItr = shapes->begin(); shapeItr != shapes->end(); shapeItr++)
     {
-      if (i + 1 < activeBlocks->size())
+      Shape *currentShape = (*shapeItr);
+      if (currentShape->drawn == false)
       {
-        int x1 = activeBlocks->at(i)->x;
-        int y1 = activeBlocks->at(i)->y;
-        
-        int x2 = activeBlocks->at(i + 1)->x;
-        int y2 = activeBlocks->at(i + 1)->y;
+        const std::vector<ShapeBlock *>* shapeBlocks = currentShape->GetBlocks();
 
-        thickLineRGBA(renderer, x1, y1, x2, y2, 2, 0, 255, 0, 255);
+        for (unsigned int blockIndex = 0; blockIndex < shapeBlocks->size(); blockIndex++)
+        {
+          if (blockIndex + 1 < shapeBlocks->size())
+          {
+            ShapeBlock *block1 = shapeBlocks->at(blockIndex);
+            ShapeBlock *block2 = shapeBlocks->at(blockIndex + 1);
 
-        
+            if (block1->drawn == false)
+            {
+              int x1 = block1->x;
+              int y1 = block1->y;
+              int x2 = block2->x;
+              int y2 = block2->y;
+
+              thickLineRGBA(renderer,
+                x1, y1, x2, y2,
+                block1->brushSize,
+                block1->brushColor.r, block1->brushColor.g, block1->brushColor.b, block1->brushColor.a);
+
+              block1->drawn = true;
+            }
+          }
+        }
       }
     }
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "ColorHelper.h"
 
 struct ShapeBlock
 {
@@ -9,14 +10,21 @@ struct ShapeBlock
   unsigned int y;
   int brushSize;
   int brushType;
-  int brushColor;
+  ColorRGBA brushColor;
+  bool drawn;
+
+  ShapeBlock() : drawn(false) {}
 };
 
 class Shape
 {
 public:
-  void AddBlock(ShapeBlock &block);
-  std::vector<ShapeBlock *>* GetBlocks();
+  Shape();
+
+  void AddBlock(const ShapeBlock &block);
+  const std::vector<ShapeBlock *>* GetBlocks();
+
+  bool drawn;
 
 protected:
   std::vector<ShapeBlock *> mBlocks;

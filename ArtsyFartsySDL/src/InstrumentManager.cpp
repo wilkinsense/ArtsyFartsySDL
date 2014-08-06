@@ -2,6 +2,7 @@
 #include "HistoryManager.h"
 #include <iostream>
 #include "Shape.h"
+#include <time.h>
 
 InstrumentManager* InstrumentManager::kInstance = NULL;
 
@@ -25,9 +26,9 @@ void InstrumentManager::DestroyInstance()
 }
 
 InstrumentManager::InstrumentManager() :
-mBrushSize(0), 
+mBrushSize(5), 
 mBrushType(BRUSHTYPE_PENCIL),
-mBrushColor(ColorHelper::ColorFromRGBA(0, 0, 0, 0)),
+mBrushColor(ColorRGBA(0x00, 0xFF, 0x00, 0xFF)),
 mInstrumentState(SDL_MOUSEBUTTONUP)
 {
 
@@ -67,6 +68,13 @@ void InstrumentManager::InputBegan()
 {
   mInstrumentState = SDL_MOUSEBUTTONDOWN;
   printf("Mouse down!\n");
+
+  Shape *newShape = new Shape();
+  mShapes.push_back(newShape);
+
+  currentShape = newShape;
+
+  mBrushColor = ColorRGBA(rand() % 255, rand() % 255, rand() % 255, 255);
 }
 
 void InstrumentManager::InputMoved()
@@ -74,11 +82,27 @@ void InstrumentManager::InputMoved()
   int x, y;
   SDL_GetMouseState(&x, &y);
   printf("Mouse moved at: %d, %d\n", x, y);
-  HistoryManager::GetInstance()->AddBlock(x, y, ColorHelper::ColorFromRGBA(0x00, 0xFF, 0x00, 0xFF), mBrushType, mBrushSize);
+
+  ShapeBlock currentBlock;
+  currentBlock.x = x;
+  currentBlock.y = y;
+  currentBlock.brushColor = mBrushColor;
+  currentBlock.timestamp = time(0);
+  currentBlock.brushSize = mBrushSize;
+  currentBlock.brushType = mBrushType;
+
+  currentShape->AddBlock(currentBlock);
 }
 
 void InstrumentManager::InputEnded()
 {
   mInstrumentState = SDL_MOUSEBUTTONUP;
   printf("Mouse up!\n");
+
+  currentShape->drawn = true;
+}
+
+const std::vector<Shape *>* InstrumentManager::GetActiveShapes()
+{
+  return &mShapes;
 }
