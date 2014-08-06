@@ -20,7 +20,14 @@ void HistoryManager::AddBlock(unsigned int x, unsigned int y, ColorRGBA color, B
 
   newBlock->timestamp = time(0);
   newBlock->pos = (x << 4) | y;
+  newBlock->x = x;
+  newBlock->y = y;
   newBlock->brushColor = color;
   newBlock->brushType = type;
   newBlock->brushSize = size;
+}
+
+const std::vector<HistoryBlock *>* HistoryManager::GetActiveBlocks()
+{
+  return &mActiveBlocks;
 }

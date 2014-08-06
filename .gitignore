@@ -35,9 +35,10 @@ Icon
 .Spotlight-V100
 .Trashes
 
-ArtsyFartsySDL.opensdf
-ArtsyFartsySDL.sdf
+*.opensdf
+*.sdf
 Debug/
 Release/
 ArtsyFartsySDL/Debug/
+ArtsyFartsySDL/Debug/*
 Wwise/

@@ -3,6 +3,8 @@
 #include "ColorHelper.h"
 #include "InstrumentTypes.h"
 
+class Shape;
+
 class InstrumentManager
 {
 public:
@@ -27,6 +29,8 @@ private:
   BrushType mBrushType;
   int       mBrushSize;
   ColorRGBA mBrushColor;
+
+  std::vector<Shape *> mShapes;
 
   SDL_EventType mInstrumentState;
 };

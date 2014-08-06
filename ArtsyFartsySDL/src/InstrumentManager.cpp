@@ -1,5 +1,7 @@
 #include "InstrumentManager.h"
+#include "HistoryManager.h"
 #include <iostream>
+#include "Shape.h"
 
 InstrumentManager* InstrumentManager::kInstance = NULL;
 
@@ -72,6 +74,7 @@ void InstrumentManager::InputMoved()
   int x, y;
   SDL_GetMouseState(&x, &y);
   printf("Mouse moved at: %d, %d\n", x, y);
+  HistoryManager::GetInstance()->AddBlock(x, y, ColorHelper::ColorFromRGBA(0x00, 0xFF, 0x00, 0xFF), mBrushType, mBrushSize);
 }
 
 void InstrumentManager::InputEnded()
