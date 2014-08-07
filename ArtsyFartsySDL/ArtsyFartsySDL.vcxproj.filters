@@ -21,7 +21,13 @@
     <ClCompile Include="src\InstrumentManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\InstrumentWrapper.cpp">
+    <ClCompile Include="src\Shapes.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScreenManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DrawScreen.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,6 +48,15 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\InstrumentWrapper.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shape.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ScreenManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DrawScreen.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

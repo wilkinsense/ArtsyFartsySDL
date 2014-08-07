@@ -39,8 +39,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\Programming\GitHub\ArtsyFartsySDL\SDL_gfx\include;$(SDL)\include;$(WWISESDK)\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SDL)\lib\x64;D:\Programming\GitHub\ArtsyFartsySDL\SDL_gfx\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SDL_gfx)\include;$(SDL)\include;$(WWISESDK)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SDL)\lib\x64;$(SDL_gfx)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -70,19 +70,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\DrawScreen.cpp" />
     <ClCompile Include="src\HistoryManager.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\InstrumentManager.cpp" />
-    <ClCompile Include="src\InstrumentWrapper.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\ScreenManager.cpp" />
+    <ClCompile Include="src\Shapes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ColorHelper.h" />
+    <ClInclude Include="src\DrawScreen.h" />
     <ClInclude Include="src\HistoryManager.h" />
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\InstrumentManager.h" />
     <ClInclude Include="src\InstrumentTypes.h" />
     <ClInclude Include="src\InstrumentWrapper.h" />
+    <ClInclude Include="src\ScreenManager.h" />
+    <ClInclude Include="src\Shape.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

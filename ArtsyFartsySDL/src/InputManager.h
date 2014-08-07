@@ -16,6 +16,7 @@ public:
   static InputManager* GetInstance();
   static void DestroyInstance();
 
+  InputManager();
   ~InputManager();
 
   void AssignEvent(SDL_EventType evt, InputEvent callback);
@@ -27,8 +28,6 @@ public:
   void ProcessEvent(SDL_EventType evt);
 
 protected:
-  InputManager();
-
   static InputManager *kInstance;
   std::map<SDL_EventType, std::vector<InputBlock *> > mEventMap;
   std::map<SDL_EventType, std::vector<InputPair *> > mMemberEventMap;
