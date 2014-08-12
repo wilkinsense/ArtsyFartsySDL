@@ -2,7 +2,7 @@
 #include "HistoryManager.h"
 #include <iostream>
 #include "Shape.h"
-#include <time.h>
+#include <SDL.h>
 
 InstrumentManager* InstrumentManager::kInstance = NULL;
 
@@ -73,8 +73,10 @@ void InstrumentManager::InputBegan()
   mShapes.push_back(newShape);
 
   currentShape = newShape;
+  currentShape->brushType = mBrushType;
 
   mBrushColor = ColorRGBA(rand() % 255, rand() % 255, rand() % 255, 255);
+  GetCurrentInput();
 }
 
 void InstrumentManager::InputMoved()
@@ -83,15 +85,7 @@ void InstrumentManager::InputMoved()
   SDL_GetMouseState(&x, &y);
   printf("Mouse moved at: %d, %d\n", x, y);
 
-  ShapeBlock currentBlock;
-  currentBlock.x = x;
-  currentBlock.y = y;
-  currentBlock.brushColor = mBrushColor;
-  currentBlock.timestamp = time(0);
-  currentBlock.brushSize = mBrushSize;
-  currentBlock.brushType = mBrushType;
-
-  currentShape->AddBlock(currentBlock);
+  GetCurrentInput();
 }
 
 void InstrumentManager::InputEnded()
@@ -105,4 +99,24 @@ void InstrumentManager::InputEnded()
 const std::vector<Shape *>* InstrumentManager::GetActiveShapes()
 {
   return &mShapes;
+}
+
+void InstrumentManager::GetCurrentInput()
+{
+  int x, y;
+  SDL_GetMouseState(&x, &y);
+
+  ShapeBlock currentBlock;
+  currentBlock.x = x;
+  currentBlock.y = y;
+  currentBlock.brushColor = mBrushColor;
+  currentBlock.timestamp = SDL_GetTicks();
+  currentBlock.brushSize = mBrushSize;
+
+  currentShape->AddBlock(currentBlock);
+}
+
+void InstrumentManager::DrawShapes(BrushType type)
+{
+  
 }

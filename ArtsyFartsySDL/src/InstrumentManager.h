@@ -36,5 +36,9 @@ private:
   std::vector<Shape *> mShapes;
   Shape *currentShape;
 
+  void GetCurrentInput();
+
+  void DrawShapes(BrushType type);
+
   SDL_EventType mInstrumentState;
 };

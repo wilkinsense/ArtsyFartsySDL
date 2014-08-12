@@ -1,15 +1,17 @@
 #pragma once
 
+#include <SDL.h>
 #include <vector>
 #include "ColorHelper.h"
+#include "InstrumentTypes.h"
 
 struct ShapeBlock
 {
-  long timestamp;
+  Uint32 timestamp;
   unsigned int x;
   unsigned int y;
   int brushSize;
-  int brushType;
+  //BrushType brushType;
   ColorRGBA brushColor;
   bool drawn;
 
@@ -25,6 +27,7 @@ public:
   const std::vector<ShapeBlock *>* GetBlocks();
 
   bool drawn;
+  BrushType brushType;
 
 protected:
   std::vector<ShapeBlock *> mBlocks;
