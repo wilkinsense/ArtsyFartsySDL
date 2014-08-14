@@ -3,10 +3,26 @@
 #include "InstrumentWrapper.h"
 #include "Shape.h"
 #include <SDL2_gfxPrimitives.h>
+#include "Instrument.h"
+#include "Instruments\Pencil.h"
+#include "Instruments\Confetti.h"
 
-DrawScreen::DrawScreen() { }
+DrawScreen::DrawScreen()
+{
+  mInstruments.insert(std::pair<int, Instrument *>(BRUSHTYPE_PENCIL, new Pencil()));
+  mInstruments.insert(std::pair<int, Instrument *>(BRUSHTYPE_CONFETTI, new Confetti()));
+}
 
-DrawScreen::~DrawScreen() { }
+DrawScreen::~DrawScreen()
+{
+  for (auto mapItr = mInstruments.begin(); mapItr != mInstruments.end(); mapItr++)
+  {
+    Instrument *instrument = mapItr->second;
+    delete instrument;
+  }
+
+  mInstruments.clear();
+}
 
 void DrawScreen::OnEnter()
 {
@@ -39,88 +55,19 @@ void DrawScreen::Draw(SDL_Renderer *renderer)
   }
   //printf("Modifier: %f\n", modifier);
 
+  Instrument *currentInstrument = nullptr;
+
   const std::vector<Shape *>* shapes = InstrumentManager::GetInstance()->GetActiveShapes();
   for (auto shapeItr = shapes->begin(); shapeItr != shapes->end(); shapeItr++)
   {
     Shape *currentShape = (*shapeItr);
     if (currentShape->drawn == false)
     {
-      const std::vector<ShapeBlock *>* shapeBlocks = currentShape->GetBlocks();
-
-      for (unsigned int blockIndex = 0; blockIndex < shapeBlocks->size(); blockIndex++)
+      auto instrumentItr = mInstruments.find(currentShape->brushType);
+      if (instrumentItr != mInstruments.end())
       {
-        ShapeBlock *block = shapeBlocks->at(blockIndex);
-
-        int x1 = block->x;
-        int y1 = block->y;
-        int x2 = block->x;
-        int y2 = block->y;
-        int brushSize = currentShape->brushType == BRUSHTYPE_PENCIL ? block->brushSize / 2 : block->brushSize;
-        bool willDraw = (block->drawn == false);
-
-        if (blockIndex + 1 < shapeBlocks->size())
-        {
-          ShapeBlock *block2 = shapeBlocks->at(blockIndex + 1);
-          x2 = block2->x;
-          y2 = block2->y;
-
-          int difference = (block2->timestamp - block->timestamp);
-          if (difference < 0)
-          {
-            difference = 0;
-          }
-
-          brushSize = block->brushSize;
-
-          if ((blockIndex == 0 && shapeBlocks->size() == 2) && currentShape->brushType == BRUSHTYPE_PENCIL)
-          {
-            willDraw = true;
-          }
-          //brushSize = block2->brushSize + (difference / 10.0f);
-        }
-        else if (shapeBlocks->size() > 1)
-        {
-          continue;
-        }
-
-        if (willDraw)
-        {
-          int variance = block->brushSize * 10;
-
-          switch (currentShape->brushType)
-          {
-          case BRUSHTYPE_PENCIL:
-            thickLineRGBA(renderer,
-              x1, y1, x2, y2,
-              brushSize,
-              block->brushColor.r, block->brushColor.g, block->brushColor.b, block->brushColor.a);
-            break;
-
-          case BRUSHTYPE_CONFETTI:
-            thickLineRGBA(renderer,
-              x1 + (rand() % variance) - (block->brushSize * 5), 
-              y1 + (rand() % variance) - (block->brushSize * 5), 
-              x2 + (rand() % variance) - (block->brushSize * 5),
-              y2 + (rand() % variance) - (block->brushSize * 5),
-              brushSize,
-              block->brushColor.r - (rand() % 50), 
-              block->brushColor.g - (rand() % 50), 
-              block->brushColor.b - (rand() % 50), 
-              block->brushColor.a);
-            break;
-
-          default:
-
-            break;
-          }
-
-          /*thickLineRGBA(renderer,
-            x1 + 5, y1 + 5, x2 + 5, y2 + 5,
-            block->brushSize,
-            block->brushColor.r, block->brushColor.g, block->brushColor.b, block->brushColor.a);*/
-
-          block->drawn = true;
-        }
+        currentInstrument = instrumentItr->second;
+        currentInstrument->DrawShape(renderer, currentShape);
       }
     }
   }

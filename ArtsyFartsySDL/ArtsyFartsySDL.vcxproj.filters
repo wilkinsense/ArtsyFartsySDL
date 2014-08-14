@@ -7,6 +7,9 @@
     <Filter Include="src">
       <UniqueIdentifier>{11f0a268-f743-4be8-af55-086b25daa5e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Instruments">
+      <UniqueIdentifier>{afe6016a-8b03-4649-a4d7-3b5295f140c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -29,6 +32,12 @@
     </ClCompile>
     <ClCompile Include="src\DrawScreen.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Instruments\Pencil.cpp">
+      <Filter>src\Instruments</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Instruments\Confetti.cpp">
+      <Filter>src\Instruments</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +67,15 @@
     </ClInclude>
     <ClInclude Include="src\DrawScreen.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Instrument.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Instruments\Pencil.h">
+      <Filter>src\Instruments</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Instruments\Confetti.h">
+      <Filter>src\Instruments</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

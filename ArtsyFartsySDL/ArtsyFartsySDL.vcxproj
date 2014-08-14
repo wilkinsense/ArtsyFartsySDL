@@ -74,6 +74,8 @@
     <ClCompile Include="src\HistoryManager.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\InstrumentManager.cpp" />
+    <ClCompile Include="src\Instruments\Confetti.cpp" />
+    <ClCompile Include="src\Instruments\Pencil.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ScreenManager.cpp" />
     <ClCompile Include="src\Shapes.cpp" />
@@ -83,7 +85,10 @@
     <ClInclude Include="src\DrawScreen.h" />
     <ClInclude Include="src\HistoryManager.h" />
     <ClInclude Include="src\InputManager.h" />
+    <ClInclude Include="src\Instrument.h" />
     <ClInclude Include="src\InstrumentManager.h" />
+    <ClInclude Include="src\Instruments\Confetti.h" />
+    <ClInclude Include="src\Instruments\Pencil.h" />
     <ClInclude Include="src\InstrumentTypes.h" />
     <ClInclude Include="src\InstrumentWrapper.h" />
     <ClInclude Include="src\ScreenManager.h" />

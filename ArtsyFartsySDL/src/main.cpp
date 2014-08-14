@@ -19,6 +19,9 @@ public:
     printf("Thing is called.\n");
     InputManager::GetInstance()->RemoveEvent(SDL_KEYDOWN, this, (InputMemberEvent)&TestClass::CallAThing);
     InputManager::GetInstance()->AssignEvent(SDL_KEYDOWN, this, (InputMemberEvent)&TestClass::CallAnotherThing);
+
+    InstrumentManager *im = InstrumentManager::GetInstance();
+    im->SetBrushType((BrushType)((im->GetBrushType() + 1) % BRUSHTYPE_COUNT));
   }
 
   void CallAnotherThing()
@@ -26,6 +29,9 @@ public:
     printf("This other thing is called.\n");
     InputManager::GetInstance()->RemoveEvent(SDL_KEYDOWN, this, (InputMemberEvent)&TestClass::CallAnotherThing);
     InputManager::GetInstance()->AssignEvent(SDL_KEYDOWN, this, (InputMemberEvent)&TestClass::CallAThing);
+    
+    InstrumentManager *im = InstrumentManager::GetInstance();
+    im->SetBrushType((BrushType)((im->GetBrushType() + 1) % BRUSHTYPE_COUNT));
   }
 };
 
