@@ -42,3 +42,17 @@ Release/
 ArtsyFartsySDL/Debug/
 ArtsyFartsySDL/Debug/*
 Wwise/
+ArtsyFartsySDL.sdf
+ArtsyFartsySDL.sdf
+*.suo
+*.log
+ArtsyFartsySDL/Debug/main.obj
+ArtsyFartsySDL/Debug/vc120.idb
+ArtsyFartsySDL/Debug/ArtsyFartsySDL.tlog/link.write.1.tlog
+ArtsyFartsySDL/Debug/ArtsyFartsySDL.tlog/link.read.1.tlog
+ArtsyFartsySDL/Debug/ArtsyFartsySDL.tlog/link.command.1.tlog
+ArtsyFartsySDL/Debug/ArtsyFartsySDL.tlog/CL.write.1.tlog
+ArtsyFartsySDL/Debug/ArtsyFartsySDL.tlog/CL.read.1.tlog
+ArtsyFartsySDL/Debug/ArtsyFartsySDL.tlog/cl.command.1.tlog
+ArtsyFartsySDL/Debug/ArtsyFartsySDL.tlog/ArtsyFartsySDL.lastbuildstate
+ArtsyFartsySDL/Debug/vc120.pdb
