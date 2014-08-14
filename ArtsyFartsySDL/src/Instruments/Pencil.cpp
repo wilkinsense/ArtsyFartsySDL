@@ -3,9 +3,10 @@
 #include <SDL2_gfxPrimitives.h>
 #include "../Shape.h"
 
-void Pencil::DrawShape(SDL_Renderer *renderer, Shape *shape)
+bool Pencil::DrawShape(SDL_Renderer *renderer, Shape *shape, bool incremental)
 {
   const std::vector<ShapeBlock *>* shapeBlocks = shape->GetBlocks();
+  bool didDraw = false;
 
   for (unsigned int blockIndex = 0; blockIndex < shapeBlocks->size(); blockIndex++)
   {
@@ -26,12 +27,50 @@ void Pencil::DrawShape(SDL_Renderer *renderer, Shape *shape)
       continue;
     }
 
+    if (incremental)
+    {
+      mLastIncrementalTimestamp = SDL_GetTicks();
+      if (mLastIncrementalShape != shape)
+      {
+        mShapeTimestamp = mLastIncrementalTimestamp;
+        mLastIncrementalShape = shape;
+      }
+    }
+
     if (willDraw)
     {
-      DrawBlock(renderer, firstBlock, secondBlock);
-      firstBlock->drawn = true;
+      bool skipDrawing = false;
+      
+      if (incremental == true && secondBlock != nullptr && secondBlock->drawn == false)
+      {
+        Uint32 blockTimeDiff = secondBlock->timestamp - firstBlock->timestamp;
+        Uint32 incrementalTimeDiff = mLastIncrementalTimestamp - mShapeTimestamp;
+
+        if (incrementalTimeDiff < blockTimeDiff)
+        {
+          skipDrawing = true;
+        }
+        else
+        {
+          mShapeTimestamp = mLastIncrementalTimestamp;
+        }
+      }
+
+      if (skipDrawing == false)
+      {
+        DrawBlock(renderer, firstBlock, secondBlock);
+        firstBlock->drawn = true;
+      }
+      didDraw = true;
+
+      if (incremental == true)
+      {
+        break;
+      }
     }
   }
+
+  return didDraw;
 }
 
 void Pencil::DrawBlock(SDL_Renderer *renderer, ShapeBlock *firstBlock, ShapeBlock *secondBlock)

@@ -4,16 +4,7 @@
 #include <string>
 
 struct SDL_Renderer;
-
-class Screen
-{
-public:
-  virtual void Update(const SDL_EventType &type) = 0;
-  virtual void Draw(SDL_Renderer *renderer) = 0;
-
-  virtual void OnEnter() { }
-  virtual void OnExit() { }
-};
+class Screen;
 
 class ScreenManager
 {
@@ -36,6 +27,8 @@ public:
 protected:
   static ScreenManager *kInstance;
   ScreenManager();
+
+  void ClearRenderer();
 
   std::map<std::string, Screen *> mScreens;
   Screen *mActiveScreen;

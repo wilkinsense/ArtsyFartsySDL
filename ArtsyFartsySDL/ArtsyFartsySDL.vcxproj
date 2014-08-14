@@ -76,8 +76,11 @@
     <ClCompile Include="src\InstrumentManager.cpp" />
     <ClCompile Include="src\Instruments\Confetti.cpp" />
     <ClCompile Include="src\Instruments\Pencil.cpp" />
+    <ClCompile Include="src\Instruments\Spray.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ScreenManager.cpp" />
+    <ClCompile Include="src\Screens\ReplayScreen.cpp" />
+    <ClCompile Include="src\Screens\Screen.cpp" />
     <ClCompile Include="src\Shapes.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -89,9 +92,12 @@
     <ClInclude Include="src\InstrumentManager.h" />
     <ClInclude Include="src\Instruments\Confetti.h" />
     <ClInclude Include="src\Instruments\Pencil.h" />
+    <ClInclude Include="src\Instruments\Spray.h" />
     <ClInclude Include="src\InstrumentTypes.h" />
     <ClInclude Include="src\InstrumentWrapper.h" />
     <ClInclude Include="src\ScreenManager.h" />
+    <ClInclude Include="src\Screens\ReplayScreen.h" />
+    <ClInclude Include="src\Screens\Screen.h" />
     <ClInclude Include="src\Shape.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

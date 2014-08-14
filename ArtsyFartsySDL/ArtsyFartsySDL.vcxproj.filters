@@ -10,6 +10,9 @@
     <Filter Include="src\Instruments">
       <UniqueIdentifier>{afe6016a-8b03-4649-a4d7-3b5295f140c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Screens">
+      <UniqueIdentifier>{b6386f2d-7d45-4645-8b22-60839b90ab01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -38,6 +41,15 @@
     </ClCompile>
     <ClCompile Include="src\Instruments\Confetti.cpp">
       <Filter>src\Instruments</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Instruments\Spray.cpp">
+      <Filter>src\Instruments</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Screens\ReplayScreen.cpp">
+      <Filter>src\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Screens\Screen.cpp">
+      <Filter>src\Screens</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +88,15 @@
     </ClInclude>
     <ClInclude Include="src\Instruments\Confetti.h">
       <Filter>src\Instruments</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Instruments\Spray.h">
+      <Filter>src\Instruments</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Screens\ReplayScreen.h">
+      <Filter>src\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Screens\Screen.h">
+      <Filter>src\Screens</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

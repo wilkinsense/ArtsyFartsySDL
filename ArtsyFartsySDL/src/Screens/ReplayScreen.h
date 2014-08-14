@@ -1,19 +1,17 @@
 #pragma once
 
-#include "Screens\Screen.h"
+#include "Screen.h"
+#include "../Instrument.h"
 #include <map>
 
-class Instrument;
-
-class DrawScreen : public Screen
+class ReplayScreen : public Screen
 {
 public:
-  DrawScreen();
-  ~DrawScreen();
+  ReplayScreen();
+  ~ReplayScreen();
 
   void OnEnter();
-  void OnExit();
-  
+
   void Update(const SDL_EventType &type);
   void Draw(SDL_Renderer *renderer);
 

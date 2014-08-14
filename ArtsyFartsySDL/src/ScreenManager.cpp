@@ -1,4 +1,5 @@
 #include "ScreenManager.h"
+#include "Screens\Screen.h"
 #include <SDL.h>
 
 ScreenManager* ScreenManager::kInstance = nullptr;
@@ -57,8 +58,7 @@ bool ScreenManager::ShowScreen(std::string id)
     success = true;
   }
 
-  SDL_SetRenderDrawColor(mRenderer, 0xFA, 0xF0, 0x00, 0xFF);
-  SDL_RenderClear(mRenderer);
+  ClearRenderer();
 
   return success;
 }
@@ -135,4 +135,10 @@ bool ScreenManager::IsRunning()
 void ScreenManager::SetIsRunning(bool running)
 {
   mIsRunning = running;
+}
+
+void ScreenManager::ClearRenderer()
+{
+  SDL_SetRenderDrawColor(mRenderer, 0xFA, 0xF0, 0x00, 0xFF);
+  SDL_RenderClear(mRenderer);
 }
