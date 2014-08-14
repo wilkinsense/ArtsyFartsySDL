@@ -3,10 +3,9 @@
 #include <SDL2_gfxPrimitives.h>
 #include "../Shape.h"
 
-bool Spray::DrawShape(SDL_Renderer *renderer, Shape *shape, bool incremental)
+void Spray::DrawShape(SDL_Renderer *renderer, Shape *shape, bool incremental)
 {
   const std::vector<ShapeBlock *>* shapeBlocks = shape->GetBlocks();
-  bool didDraw = false;
 
   for (unsigned int blockIndex = 0; blockIndex < shapeBlocks->size(); blockIndex++)
   {
@@ -31,7 +30,6 @@ bool Spray::DrawShape(SDL_Renderer *renderer, Shape *shape, bool incremental)
     {
       DrawBlock(renderer, firstBlock, secondBlock);
       firstBlock->drawn = true;
-      didDraw = true;
 
       if (incremental == true)
       {
@@ -39,8 +37,6 @@ bool Spray::DrawShape(SDL_Renderer *renderer, Shape *shape, bool incremental)
       }
     }
   }
-
-  return didDraw;
 }
 
 void Spray::DrawBlock(SDL_Renderer *renderer, ShapeBlock *firstBlock, ShapeBlock *secondBlock)

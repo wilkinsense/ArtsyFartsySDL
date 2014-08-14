@@ -15,6 +15,11 @@
 class TestClass
 {
 public:
+  void InputDispatch()
+  {
+    //if ()
+  }
+
   void ChangeInstrument()
   {
     printf("Changed instrument.\n");

@@ -3,6 +3,9 @@
 #include "Screen.h"
 #include "../Instrument.h"
 #include <map>
+#include <SDL_types.h>
+
+class Shape;
 
 class ReplayScreen : public Screen
 {
@@ -17,4 +20,10 @@ public:
 
 protected:
   std::map<int, Instrument *> mInstruments;
+
+  Uint32 mLastTimestamp;
+  Uint32 mCurrentTimestamp;
+  
+  Uint16 mShapeIndex;
+  Uint32 mBlockIndex;
 };
