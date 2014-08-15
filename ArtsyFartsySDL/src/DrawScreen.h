@@ -2,8 +2,11 @@
 
 #include "Screens\Screen.h"
 #include <map>
+#include <vector>
 
 class Instrument;
+struct SDL_Texture;
+class ColourButton;
 
 class DrawScreen : public Screen
 {
@@ -14,9 +17,17 @@ public:
   void OnEnter();
   void OnExit();
   
-  void Update(const SDL_EventType &type);
+  void Update(const SDL_Event &e);
   void Draw(SDL_Renderer *renderer);
 
 protected:
   std::map<int, Instrument *> mInstruments;
+
+  SDL_Texture *mButtonTexture;
+  std::vector<ColourButton *> mButtons;
+
+  void CheckInput(SDL_Event e);
+
+  int mButtonsX, mButtonsY;
+  int mButtonsOffsetX, mButtonsOffsetY;
 };

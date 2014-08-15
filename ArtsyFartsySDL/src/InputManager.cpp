@@ -4,9 +4,9 @@ class InputBlock
 {
 public:
   InputBlock(InputEvent callback) : callback(callback) { }
-  void ProcessInput()
+  void ProcessInput(SDL_Event e)
   {
-    (*callback)();
+    (*callback)(e);
   }
 
   InputEvent callback;
@@ -19,10 +19,10 @@ struct InputPair
   InputMemberEvent callback;
 
   InputPair(void *target, InputMemberEvent callback) : target(target), callback(callback) { }
-  void ProcessInput()
+  void ProcessInput(SDL_Event e)
   {
     IInput *castedTarget = (IInput *)target;
-    (castedTarget->*callback)();
+    (castedTarget->*callback)(e);
   }
 };
 
@@ -183,15 +183,16 @@ void InputManager::RemoveEvent(SDL_EventType evt, void *target, InputMemberEvent
   }
 }
 
-void InputManager::ProcessEvent(SDL_EventType evt)
+void InputManager::ProcessEvent(SDL_Event e)
 {
+  SDL_EventType evt = (SDL_EventType)e.type;
   auto mapItr = mEventMap.find(evt);
   if (mapItr != mEventMap.end())
   {
     std::vector<InputBlock *> events = mapItr->second;
     for (auto itr = events.begin(); itr != events.end(); itr++)
     {
-      (*itr)->ProcessInput();
+      (*itr)->ProcessInput(e);
     }
   }
 
@@ -201,7 +202,7 @@ void InputManager::ProcessEvent(SDL_EventType evt)
     std::vector<InputPair *> events = memberMapItr->second;
     for (auto itr = events.begin(); itr != events.end(); itr++)
     {
-      (*itr)->ProcessInput();
+      (*itr)->ProcessInput(e);
     }
   }
 }

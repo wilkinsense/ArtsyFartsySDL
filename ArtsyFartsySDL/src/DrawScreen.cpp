@@ -6,11 +6,29 @@
 #include "Instrument.h"
 #include "Instruments\Pencil.h"
 #include "Instruments\Confetti.h"
+#include "Buttons\ColourButton.h"
+#include <SDL_image.h>
+#include "ScreenManager.h"
+
+#define MAX_X 30
 
 DrawScreen::DrawScreen()
 {
   mInstruments.insert(std::pair<int, Instrument *>(BRUSHTYPE_PENCIL, new Pencil()));
   mInstruments.insert(std::pair<int, Instrument *>(BRUSHTYPE_CONFETTI, new Confetti()));
+
+  int result = IMG_Init(IMG_INIT_PNG);
+  if (result & IMG_INIT_PNG)
+  {
+    SDL_Surface *buttonSurface = IMG_Load("res/button.png");
+    mButtonTexture = SDL_CreateTextureFromSurface(ScreenManager::GetInstance()->GetRenderer(), buttonSurface);
+  }
+
+  mButtons.push_back(new ColourButton(mButtonTexture, ColorRGBA(0xFF, 0x0, 0x00, 0xFF))); // red
+  mButtons.push_back(new ColourButton(mButtonTexture, ColorRGBA(0xFF, 0xFF, 0x00, 0xFF))); // yellow
+  mButtons.push_back(new ColourButton(mButtonTexture, ColorRGBA(0xFF, 0x0, 0xFF, 0xFF))); // purple
+  mButtons.push_back(new ColourButton(mButtonTexture, ColorRGBA(0x00, 0x0, 0xFF, 0xFF))); // blue
+  mButtons.push_back(new ColourButton(mButtonTexture, ColorRGBA(0x00, 0xFF, 0x00, 0xFF))); // green
 }
 
 DrawScreen::~DrawScreen()
@@ -21,24 +39,43 @@ DrawScreen::~DrawScreen()
     delete instrument;
   }
 
+  for (auto buttonItr = mButtons.begin(); buttonItr != mButtons.end(); buttonItr++)
+  {
+    ColourButton *button = *buttonItr;
+    delete button;
+  }
+
   mInstruments.clear();
+  mButtons.clear();
 }
 
 void DrawScreen::OnEnter()
 {
-  InputManager::GetInstance()->AssignEvent(SDL_MOUSEBUTTONDOWN, (InputEvent)(&InstrumentWrapper::InputBegan));
+  //InputManager::GetInstance()->AssignEvent(SDL_MOUSEBUTTONDOWN, (InputEvent)(&InstrumentWrapper::InputBegan));
+  InputManager::GetInstance()->AssignEvent(SDL_MOUSEBUTTONDOWN, this, (InputMemberEvent)(&DrawScreen::CheckInput));
+
+  mButtonsX = -30;
+  mButtonsY = 30;
+
+  mButtonsOffsetX = 0;
+  mButtonsOffsetY = 65;
 }
 
 void DrawScreen::OnExit()
 {
-  InputManager::GetInstance()->RemoveEvent(SDL_MOUSEBUTTONDOWN, (InputEvent)(&InstrumentWrapper::InputBegan));
+  //InputManager::GetInstance()->RemoveEvent(SDL_MOUSEBUTTONDOWN, (InputEvent)(&InstrumentWrapper::InputBegan));
   InputManager::GetInstance()->RemoveEvent(SDL_MOUSEMOTION, (InputEvent)(&InstrumentWrapper::InputMoved));
   InputManager::GetInstance()->RemoveEvent(SDL_MOUSEBUTTONUP, (InputEvent)(&InstrumentWrapper::InputEnded));
 }
 
-void DrawScreen::Update(const SDL_EventType &type)
+void DrawScreen::Update(const SDL_Event &e)
 {
-  InputManager::GetInstance()->ProcessEvent(type);
+  if (mButtonsX < MAX_X)
+  {
+    //mButtonsX += 1;
+  }
+
+  InputManager::GetInstance()->ProcessEvent(e);
 }
 
 void DrawScreen::Draw(SDL_Renderer *renderer)
@@ -70,5 +107,51 @@ void DrawScreen::Draw(SDL_Renderer *renderer)
         currentInstrument->DrawShape(renderer, currentShape);
       }
     }
+  }
+
+  int xPos = mButtonsX;
+  int yPos = mButtonsY;
+  for (int buttonIndex = 0; buttonIndex < mButtons.size(); buttonIndex++)
+  {
+    mButtons[buttonIndex]->Draw(renderer, xPos, yPos);
+    xPos += mButtonsOffsetX;
+    yPos += mButtonsOffsetY;
+  }
+}
+
+void DrawScreen::CheckInput(SDL_Event e)
+{
+  int x = e.button.x;
+  int y = e.button.y;
+
+  int halfWidth = 30;
+  int xPos = mButtonsX + halfWidth, yPos = mButtonsY + halfWidth;
+
+  bool foundInput = false;
+  ColorRGBA color;
+  for (int buttonIndex = 0; buttonIndex < mButtons.size(); buttonIndex++)
+  {
+    int diffX = abs(x - xPos);
+    int diffY = abs(y - yPos);
+    float diff = sqrtf((diffX * diffX) + (diffY * diffY));
+    if (diff <= halfWidth)
+    {
+      foundInput = true;
+      color = mButtons[buttonIndex]->GetColor();
+      break;
+    }
+
+    xPos += mButtonsOffsetX;
+    yPos += mButtonsOffsetY;
+  }
+
+  if (foundInput)
+  {
+    printf("Changing colours!");
+    InstrumentManager::GetInstance()->SetBrushColor(color);
+  }
+  else
+  {
+    InstrumentWrapper::InputBegan(e);
   }
 }

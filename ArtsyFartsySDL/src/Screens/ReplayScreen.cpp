@@ -6,6 +6,7 @@
 #include "../InstrumentManager.h"
 #include <vector>
 #include "../Shape.h"
+#include "../InputManager.h"
 
 ReplayScreen::ReplayScreen()
 {
@@ -35,8 +36,6 @@ void ReplayScreen::OnEnter()
     {
       (*blockItr)->drawn = false;
     }
-
-    currentShape->drawn = false;
   }
 
   mShapeIndex = 0;
@@ -45,9 +44,9 @@ void ReplayScreen::OnEnter()
   mLastTimestamp = SDL_GetTicks();
 }
 
-void ReplayScreen::Update(const SDL_EventType &type)
+void ReplayScreen::Update(const SDL_Event &e)
 {
-
+  InputManager::GetInstance()->ProcessEvent(e);
 }
 
 void ReplayScreen::Draw(SDL_Renderer *renderer)
@@ -70,7 +69,7 @@ void ReplayScreen::Draw(SDL_Renderer *renderer)
       {
         ShapeBlock *secondBlock = blocks->at(mBlockIndex + 1);
 
-        Uint32 blockTimeDiff = secondBlock->timestamp - firstBlock->timestamp;
+        Uint32 blockTimeDiff = (secondBlock->timestamp - firstBlock->timestamp) * 1.25f;
         Uint32 incrementalTimeDiff = mCurrentTimestamp - mLastTimestamp;
 
         if (incrementalTimeDiff >= blockTimeDiff)

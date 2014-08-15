@@ -51,6 +51,9 @@
     <ClCompile Include="src\Screens\Screen.cpp">
       <Filter>src\Screens</Filter>
     </ClCompile>
+    <ClCompile Include="src\Buttons\ColourButton.cpp">
+      <Filter>src\Screens</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ColorHelper.h">
@@ -96,6 +99,9 @@
       <Filter>src\Screens</Filter>
     </ClInclude>
     <ClInclude Include="src\Screens\Screen.h">
+      <Filter>src\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Buttons\ColourButton.h">
       <Filter>src\Screens</Filter>
     </ClInclude>
   </ItemGroup>

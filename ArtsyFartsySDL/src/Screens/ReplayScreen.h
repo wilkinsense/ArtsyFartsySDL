@@ -15,7 +15,7 @@ public:
 
   void OnEnter();
 
-  void Update(const SDL_EventType &type);
+  void Update(const SDL_Event &e);
   void Draw(SDL_Renderer *renderer);
 
 protected:

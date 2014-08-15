@@ -39,8 +39,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SDL_gfx)\include;$(SDL)\include;$(WWISESDK)\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SDL)\lib\x64;$(SDL_gfx)\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SDL_gfx)\include;$(SDL_image)\include;$(SDL)\include;$(WWISESDK)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SDL)\lib\x64;$(SDL_image)\lib\x86;$(SDL_gfx)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -50,7 +50,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2_gfx.lib;OpenGL32.lib;SDL2.lib;SDL2main.lib;AkAudioInputSource.lib;AkCompressorFX.lib;AkConvolutionReverbFX.lib;AkDelayFX.lib;AkExpanderFX.lib;AkFlangerFX.lib;AkGainFX.lib;AkGuitarDistortionFX.lib;AkHarmonizerFX.lib;AkMatrixReverbFX.lib;AkMemoryMgr.lib;AkMeterFX.lib;AkMotionGenerator.lib;AkMP3Source.lib;AkMusicEngine.lib;AkParametricEQFX.lib;AkPeakLimiterFX.lib;AkPitchShifterFX.lib;AkRoomVerbFX.lib;AkRumble.lib;AkSilenceSource.lib;AkSineSource.lib;AkSoundEngine.lib;AkSoundEngineDLL.lib;AkSoundSeedImpactFX.lib;AkSoundSeedWind.lib;AkSoundSeedWoosh.lib;AkStereoDelayFX.lib;AkStreamMgr.lib;AkTimeStretchFX.lib;AkToneSource.lib;AkTremoloFX.lib;AkVorbisDecoder.lib;AstoundsoundExpanderFX.lib;AstoundsoundFolddownFX.lib;AstoundsoundRTIFX.lib;AstoundsoundShared.lib;CommunicationCentral.lib;CrankcaseAudioREVModelPlayerFX.lib;iZHybridReverbFX.lib;iZTrashBoxModelerFX.lib;iZTrashDelayFX.lib;iZTrashDistortionFX.lib;iZTrashDynamicsFX.lib;iZTrashFiltersFX.lib;iZTrashMultibandDistortionFX.lib;McDSPFutzBoxFX.lib;McDSPLimiterFX.lib;SFLib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2_image.lib;SDL2_gfx.lib;OpenGL32.lib;SDL2.lib;SDL2main.lib;AkAudioInputSource.lib;AkCompressorFX.lib;AkConvolutionReverbFX.lib;AkDelayFX.lib;AkExpanderFX.lib;AkFlangerFX.lib;AkGainFX.lib;AkGuitarDistortionFX.lib;AkHarmonizerFX.lib;AkMatrixReverbFX.lib;AkMemoryMgr.lib;AkMeterFX.lib;AkMotionGenerator.lib;AkMP3Source.lib;AkMusicEngine.lib;AkParametricEQFX.lib;AkPeakLimiterFX.lib;AkPitchShifterFX.lib;AkRoomVerbFX.lib;AkRumble.lib;AkSilenceSource.lib;AkSineSource.lib;AkSoundEngine.lib;AkSoundEngineDLL.lib;AkSoundSeedImpactFX.lib;AkSoundSeedWind.lib;AkSoundSeedWoosh.lib;AkStereoDelayFX.lib;AkStreamMgr.lib;AkTimeStretchFX.lib;AkToneSource.lib;AkTremoloFX.lib;AkVorbisDecoder.lib;AstoundsoundExpanderFX.lib;AstoundsoundFolddownFX.lib;AstoundsoundRTIFX.lib;AstoundsoundShared.lib;CommunicationCentral.lib;CrankcaseAudioREVModelPlayerFX.lib;iZHybridReverbFX.lib;iZTrashBoxModelerFX.lib;iZTrashDelayFX.lib;iZTrashDistortionFX.lib;iZTrashDynamicsFX.lib;iZTrashFiltersFX.lib;iZTrashMultibandDistortionFX.lib;McDSPFutzBoxFX.lib;McDSPLimiterFX.lib;SFLib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SDL)\lib\x86;$(WWISESDK)\Win32_vc120\Debug\lib</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -70,6 +70,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Buttons\ColourButton.cpp" />
     <ClCompile Include="src\DrawScreen.cpp" />
     <ClCompile Include="src\HistoryManager.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
@@ -84,6 +85,7 @@
     <ClCompile Include="src\Shapes.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Buttons\ColourButton.h" />
     <ClInclude Include="src\ColorHelper.h" />
     <ClInclude Include="src\DrawScreen.h" />
     <ClInclude Include="src\HistoryManager.h" />

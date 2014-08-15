@@ -19,9 +19,9 @@ public:
   void      SetBrushType(BrushType type);
   void      SetBrushColor(ColorRGBA color);
 
-  void      InputBegan();
-  void      InputMoved();
-  void      InputEnded();
+  void      InputBegan(SDL_Event e);
+  void      InputMoved(SDL_Event e);
+  void      InputEnded(SDL_Event e);
 
   const std::vector<Shape *>* GetActiveShapes();
 
@@ -36,7 +36,7 @@ private:
   std::vector<Shape *> mShapes;
   Shape *currentShape;
 
-  void GetCurrentInput();
+  void GetCurrentInput(SDL_Event e);
 
   void DrawShapes(BrushType type);
 

@@ -4,8 +4,8 @@
 #include <vector>
 
 class IInput { };
-typedef void(*InputEvent)();
-typedef void(IInput::*InputMemberEvent)();
+typedef void(*InputEvent)(SDL_Event e);
+typedef void(IInput::*InputMemberEvent)(SDL_Event e);
 
 class InputBlock;
 class InputPair;
@@ -25,7 +25,7 @@ public:
   void RemoveEvent(SDL_EventType evt, InputEvent callback);
   void RemoveEvent(SDL_EventType evt, void *target, InputMemberEvent callback);
 
-  void ProcessEvent(SDL_EventType evt);
+  void ProcessEvent(SDL_Event e);
 
 protected:
   static InputManager *kInstance;

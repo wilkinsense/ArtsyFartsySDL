@@ -64,7 +64,7 @@ void InstrumentManager::SetBrushColor(ColorRGBA color)
   mBrushColor = color;
 }
 
-void InstrumentManager::InputBegan()
+void InstrumentManager::InputBegan(SDL_Event e)
 {
   mInstrumentState = SDL_MOUSEBUTTONDOWN;
   printf("Mouse down!\n");
@@ -75,20 +75,19 @@ void InstrumentManager::InputBegan()
   currentShape = newShape;
   currentShape->brushType = mBrushType;
 
-  mBrushColor = ColorRGBA(rand() % 255, rand() % 255, rand() % 255, 255);
-  GetCurrentInput();
+  GetCurrentInput(e);
 }
 
-void InstrumentManager::InputMoved()
+void InstrumentManager::InputMoved(SDL_Event e)
 {
   int x, y;
   SDL_GetMouseState(&x, &y);
   printf("Mouse moved at: %d, %d\n", x, y);
 
-  GetCurrentInput();
+  GetCurrentInput(e);
 }
 
-void InstrumentManager::InputEnded()
+void InstrumentManager::InputEnded(SDL_Event e)
 {
   mInstrumentState = SDL_MOUSEBUTTONUP;
   printf("Mouse up!\n");
@@ -101,16 +100,29 @@ const std::vector<Shape *>* InstrumentManager::GetActiveShapes()
   return &mShapes;
 }
 
-void InstrumentManager::GetCurrentInput()
+void InstrumentManager::GetCurrentInput(SDL_Event e)
 {
-  int x, y;
-  SDL_GetMouseState(&x, &y);
+  int x, y, timestamp;
+  if (e.type == SDL_MOUSEBUTTONDOWN)
+  {
+    SDL_MouseButtonEvent mbe = e.button;
+    x = mbe.x;
+    y = mbe.y;
+    timestamp = mbe.timestamp;
+  }
+  else if (e.type == SDL_MOUSEMOTION)
+  {
+    SDL_MouseMotionEvent mme = e.motion;
+    x = mme.x;
+    y = mme.y;
+    timestamp = mme.timestamp;
+  }
 
   ShapeBlock currentBlock;
   currentBlock.x = x;
   currentBlock.y = y;
   currentBlock.brushColor = mBrushColor;
-  currentBlock.timestamp = SDL_GetTicks();
+  currentBlock.timestamp = timestamp;
   currentBlock.brushSize = mBrushSize;
 
   currentShape->AddBlock(currentBlock);

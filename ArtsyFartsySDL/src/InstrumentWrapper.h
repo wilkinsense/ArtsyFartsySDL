@@ -5,36 +5,36 @@
 class InstrumentWrapper
 {
 public:
-  static void InputBegan()
+  static void InputBegan(SDL_Event e)
   {
     InstrumentManager *im = InstrumentManager::GetInstance();
-    im->InputBegan();
-    InputManager::GetInstance()->RemoveEvent(SDL_MOUSEBUTTONDOWN, (InputEvent)&InstrumentWrapper::InputBegan);
+    im->InputBegan(e);
+    //InputManager::GetInstance()->RemoveEvent(SDL_MOUSEBUTTONDOWN, (InputEvent)&InstrumentWrapper::InputBegan);
     InputManager::GetInstance()->AssignEvent(SDL_MOUSEBUTTONUP, (InputEvent)&InstrumentWrapper::InputEnded);
     InputManager::GetInstance()->AssignEvent(SDL_MOUSEMOTION, (InputEvent)&InstrumentWrapper::InputMoved);
   }
 
-  static void InputMoved()
+  static void InputMoved(SDL_Event e)
   {
     static int lastX = 0, lastY = 0;
-    int x, y;
-    SDL_GetMouseState(&x, &y);
 
-    if (lastX != x || lastY != y)
+    SDL_MouseMotionEvent mme = e.motion;
+
+    if (lastX != mme.x || lastY != mme.y)
     {
       InstrumentManager *im = InstrumentManager::GetInstance();
-      im->InputMoved(); 
-      lastX = x;
-      lastY = y;
+      im->InputMoved(e); 
+      lastX = mme.x;
+      lastY = mme.y;
     }
   }
 
-  static void InputEnded()
+  static void InputEnded(SDL_Event e)
   {
     InstrumentManager *im = InstrumentManager::GetInstance();
-    im->InputEnded();
+    im->InputEnded(e);
     InputManager::GetInstance()->RemoveEvent(SDL_MOUSEBUTTONUP, (InputEvent)&InstrumentWrapper::InputEnded);
     InputManager::GetInstance()->RemoveEvent(SDL_MOUSEMOTION, (InputEvent)&InstrumentWrapper::InputMoved);
-    InputManager::GetInstance()->AssignEvent(SDL_MOUSEBUTTONDOWN, (InputEvent)&InstrumentWrapper::InputBegan);
+    //InputManager::GetInstance()->AssignEvent(SDL_MOUSEBUTTONDOWN, (InputEvent)&InstrumentWrapper::InputBegan);
   }
 };

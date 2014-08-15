@@ -12,38 +12,25 @@
 #include "DrawScreen.h"
 #include "Screens\ReplayScreen.h"
 
+#define MAX_BRUSH_SIZE 20
+#define MIN_BRUSH_SIZE 2
+
 class TestClass
 {
 public:
-  void InputDispatch()
-  {
-    //if ()
-  }
+  void InputDispatch(SDL_Event e);
+  void ChangeInstrument();
+  void ShowReplay();
+  void FingerMotion();
 
-  void ChangeInstrument()
-  {
-    printf("Changed instrument.\n");
-
-    InstrumentManager *im = InstrumentManager::GetInstance();
-    im->SetBrushType((BrushType)((im->GetBrushType() + 1) % BRUSHTYPE_COUNT));
-  }
-
-  void ShowReplay()
-  {
-    ScreenManager *sm = ScreenManager::GetInstance();
-    sm->ShowScreen("REPLAY");
-  }
-
-  void FingerMotion()
-  {
-    printf("FUUUUUUUCK\n");
-  }
+  void IncreaseBrushSize();
+  void DecreaseBrushize();
 };
 
 int main(int argc, char ** argv)
 {
   TestClass c;
-  InputManager::GetInstance()->AssignEvent(SDL_KEYDOWN, &c, (InputMemberEvent)(&TestClass::ShowReplay));
+  InputManager::GetInstance()->AssignEvent(SDL_KEYDOWN, &c, (InputMemberEvent)(&TestClass::InputDispatch));
 
   InputManager::GetInstance()->AssignEvent(SDL_FINGERMOTION, &c, (InputMemberEvent)(&TestClass::FingerMotion));
 
@@ -65,4 +52,72 @@ int main(int argc, char ** argv)
   ScreenManager::DestroyInstance();
   
   return 0;
+}
+
+
+void TestClass::InputDispatch(SDL_Event e)
+{
+  SDL_KeyboardEvent ke = e.key;
+  SDL_Keycode kc = ke.keysym.sym;
+  switch (kc)
+  {
+  case SDLK_SPACE:
+    ShowReplay();
+    break;
+
+  case SDLK_q:
+    ChangeInstrument();
+    break;
+
+  case SDLK_z:
+    DecreaseBrushize();
+    break;
+
+  case SDLK_x:
+    IncreaseBrushSize();
+    break;
+  }
+}
+
+void TestClass::ChangeInstrument()
+{
+  printf("Changed instrument.\n");
+
+  InstrumentManager *im = InstrumentManager::GetInstance();
+  im->SetBrushType((BrushType)((im->GetBrushType() + 1) % BRUSHTYPE_COUNT));
+}
+
+void TestClass::ShowReplay()
+{
+  ScreenManager *sm = ScreenManager::GetInstance();
+  sm->ShowScreen("REPLAY");
+}
+
+void TestClass::FingerMotion()
+{
+  printf("FUUUUUUUCK\n");
+}
+
+void TestClass::IncreaseBrushSize()
+{
+  InstrumentManager *im = InstrumentManager::GetInstance();
+  int brushSize = im->GetBrushSize() + 1;
+  if (brushSize > MAX_BRUSH_SIZE)
+  {
+    brushSize = MAX_BRUSH_SIZE;
+  }
+
+  im->SetBrushSize(brushSize);
+}
+
+void TestClass::DecreaseBrushize()
+{
+  InstrumentManager *im = InstrumentManager::GetInstance();
+  int brushSize = im->GetBrushSize() - 1;
+  if (brushSize < MIN_BRUSH_SIZE)
+  {
+    brushSize = MIN_BRUSH_SIZE;
+  }
+
+  im->SetBrushSize(brushSize);
 }

@@ -9,7 +9,7 @@ public:
   Screen();
   ~Screen();
 
-  virtual void Update(const SDL_EventType &type) = 0;
+  virtual void Update(const SDL_Event &e) = 0;
   virtual void Draw(SDL_Renderer *renderer) = 0;
 
   virtual void OnEnter() { }

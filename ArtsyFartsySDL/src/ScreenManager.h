@@ -24,6 +24,8 @@ public:
   bool IsRunning();
   void SetIsRunning(bool running);
 
+  SDL_Renderer* GetRenderer() const;
+
 protected:
   static ScreenManager *kInstance;
   ScreenManager();

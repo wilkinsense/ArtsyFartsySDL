@@ -27,7 +27,7 @@ ScreenManager::ScreenManager()
 {
   SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
 
-  mWindow = SDL_CreateWindow("Artsy Fartsy", 100, 100, 500, 500, SDL_WINDOW_SHOWN);
+  mWindow = SDL_CreateWindow("Artsy Fartsy", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 500, SDL_WINDOW_SHOWN);
   mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
 
   mActiveScreen = nullptr;
@@ -53,12 +53,12 @@ bool ScreenManager::ShowScreen(std::string id)
       mActiveScreen->OnExit();
     }
 
+    ClearRenderer();
+
     mActiveScreen = screenItr->second;
     mActiveScreen->OnEnter();
     success = true;
   }
-
-  ClearRenderer();
 
   return success;
 }
@@ -106,7 +106,7 @@ void ScreenManager::Update()
 
     if (mActiveScreen)
     {
-      mActiveScreen->Update((SDL_EventType)e.type);
+      mActiveScreen->Update(e);
     }
 
     if (e.type == SDL_QUIT)
@@ -139,6 +139,11 @@ void ScreenManager::SetIsRunning(bool running)
 
 void ScreenManager::ClearRenderer()
 {
-  SDL_SetRenderDrawColor(mRenderer, 0xFA, 0xF0, 0x00, 0xFF);
+  SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
   SDL_RenderClear(mRenderer);
+}
+
+SDL_Renderer* ScreenManager::GetRenderer() const
+{
+  return mRenderer;
 }
