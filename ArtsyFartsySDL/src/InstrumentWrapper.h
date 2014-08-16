@@ -53,4 +53,10 @@ public:
     InstrumentManager *im = InstrumentManager::GetInstance();
     im->SetBrushType(BRUSHTYPE_SPRAY);
   }
+
+  static void ChangeToEraser()
+  {
+    InstrumentManager *im = InstrumentManager::GetInstance();
+    im->SetBrushType(BRUSHTYPE_ERASER);
+  }
 };

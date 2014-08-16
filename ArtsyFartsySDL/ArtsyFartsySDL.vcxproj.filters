@@ -63,6 +63,9 @@
     <ClCompile Include="src\Buttons\InstrumentButton.cpp">
       <Filter>src\Buttons</Filter>
     </ClCompile>
+    <ClCompile Include="src\Instruments\Eraser.cpp">
+      <Filter>src\Instruments</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ColorHelper.h">
@@ -118,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="src\Buttons\InstrumentButton.h">
       <Filter>src\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Instruments\Eraser.h">
+      <Filter>src\Instruments</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

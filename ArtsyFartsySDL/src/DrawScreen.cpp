@@ -7,6 +7,7 @@
 #include "Instruments\Pencil.h"
 #include "Instruments\Confetti.h"
 #include "Instruments\Spray.h"
+#include "Instruments\Eraser.h"
 #include "Buttons\ColourButton.h"
 #include "Buttons\InstrumentButton.h"
 #include <SDL_image.h>
@@ -20,6 +21,7 @@ DrawScreen::DrawScreen()
   mInstruments.insert(std::pair<int, Instrument *>(BRUSHTYPE_PENCIL, new Pencil()));
   mInstruments.insert(std::pair<int, Instrument *>(BRUSHTYPE_CONFETTI, new Confetti()));
   mInstruments.insert(std::pair<int, Instrument *>(BRUSHTYPE_SPRAY, new Spray()));
+  mInstruments.insert(std::pair<int, Instrument *>(BRUSHTYPE_ERASER, new Eraser()));
 
   SDL_Window *window = ScreenManager::GetInstance()->GetWindow();
   SDL_Renderer *renderer = ScreenManager::GetInstance()->GetRenderer();
@@ -51,11 +53,27 @@ DrawScreen::DrawScreen()
     SDL_Surface *sprayButtonSurface = IMG_Load("res/spraybutton.png");
     mSprayTexture = SDL_CreateTextureFromSurface(renderer, sprayButtonSurface);
 
+    SDL_Surface *eraserButtonSurface = IMG_Load("res/confettibutton.png");
+    mEraserTexture = SDL_CreateTextureFromSurface(renderer, eraserButtonSurface);
+
     IMG_Quit();
 
-    mInstrumentButtons.insert(std::pair<int, InstrumentButton *>(BRUSHTYPE_PENCIL, new InstrumentButton(mPencilTexture, width - 210, height - 70)));
-    mInstrumentButtons.insert(std::pair<int, InstrumentButton *>(BRUSHTYPE_CONFETTI, new InstrumentButton(mConfettiTexture, width - 140, height - 70)));
+    mInstrumentButtons.insert(std::pair<int, InstrumentButton *>(BRUSHTYPE_ERASER, new InstrumentButton(mEraserTexture, width - 140, height - 70)));
     mInstrumentButtons.insert(std::pair<int, InstrumentButton *>(BRUSHTYPE_SPRAY, new InstrumentButton(mSprayTexture, width - 70, height - 70)));
+    mInstrumentButtons.insert(std::pair<int, InstrumentButton *>(BRUSHTYPE_CONFETTI, new InstrumentButton(mConfettiTexture, width - 140, height - 70)));
+    mInstrumentButtons.insert(std::pair<int, InstrumentButton *>(BRUSHTYPE_PENCIL, new InstrumentButton(mPencilTexture, width - 210, height - 70)));
+
+
+    int xPosOffset = -70;
+    int xPos = width + xPosOffset, yPos = height - 70;
+    for (auto buttonItr = mInstrumentButtons.begin(); buttonItr != mInstrumentButtons.end(); buttonItr++)
+    {
+      InstrumentButton *button = buttonItr->second;
+      button->SetX(xPos);
+      button->SetY(yPos);
+
+      xPos += xPosOffset;
+    }
   }
 
   mButtons.push_back(new ColourButton(mButtonTexture, ColorRGBA(0xFF, 0x0, 0x00, 0xFF), mButtonsX, mButtonsY)); // red
@@ -109,6 +127,15 @@ void DrawScreen::OnEnter()
   mButtonsOffsetY = 65;
 
   mWithinButtons = false;
+
+  // Copy whatever the contents are of the screen into the frame buffer.
+  SDL_Renderer *renderer = ScreenManager::GetInstance()->GetRenderer();
+  SDL_Texture *oldTexture = SDL_GetRenderTarget(renderer);
+  int success = SDL_SetRenderTarget(renderer, mBackBuffer);
+
+  success = SDL_RenderCopy(renderer, oldTexture, NULL, NULL);
+
+  success = SDL_SetRenderTarget(renderer, oldTexture);
 }
 
 void DrawScreen::OnExit()
@@ -235,6 +262,10 @@ void DrawScreen::CheckInput(SDL_Event e)
     else if (mInstrumentButtons[BRUSHTYPE_SPRAY]->IsPointWithinButton(x, y))
     {
       InstrumentWrapper::ChangeToSpray();
+    }
+    else if (mInstrumentButtons[BRUSHTYPE_ERASER]->IsPointWithinButton(x, y))
+    {
+      InstrumentWrapper::ChangeToEraser();
     }
     else
     {

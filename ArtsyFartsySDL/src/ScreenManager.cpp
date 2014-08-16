@@ -30,12 +30,17 @@ ScreenManager::ScreenManager()
   mWindow = SDL_CreateWindow("Artsy Fartsy", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 500, SDL_WINDOW_SHOWN);
   mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
 
+  mDefaultTarget = SDL_CreateTexture(mRenderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 1000, 500);
+  //SDL_SetRenderTarget(mRenderer, mDefaultTarget);
+
   mActiveScreen = nullptr;
   mIsRunning = true;
 }
 
 ScreenManager::~ScreenManager()
 {
+  SDL_DestroyTexture(mDefaultTarget);
+
   SDL_DestroyRenderer(mRenderer);
   SDL_DestroyWindow(mWindow);
 

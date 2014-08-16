@@ -4,6 +4,7 @@
 #include <string>
 
 struct SDL_Renderer;
+struct SDL_Texture;
 class Screen;
 
 class ScreenManager
@@ -38,6 +39,7 @@ protected:
 
   SDL_Window *mWindow;
   SDL_Renderer *mRenderer;
+  SDL_Texture *mDefaultTarget;
 
   bool mIsRunning;
 };

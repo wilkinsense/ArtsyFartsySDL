@@ -29,6 +29,7 @@ protected:
   SDL_Texture *mPencilTexture;
   SDL_Texture *mSprayTexture;
   SDL_Texture *mConfettiTexture;
+  SDL_Texture *mEraserTexture;
 
   std::vector<ColourButton *> mButtons;
   InstrumentButton *mPencilButton;

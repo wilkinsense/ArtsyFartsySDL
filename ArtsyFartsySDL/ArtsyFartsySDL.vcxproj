@@ -85,6 +85,7 @@
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\InstrumentManager.cpp" />
     <ClCompile Include="src\Instruments\Confetti.cpp" />
+    <ClCompile Include="src\Instruments\Eraser.cpp" />
     <ClCompile Include="src\Instruments\Pencil.cpp" />
     <ClCompile Include="src\Instruments\Spray.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -104,6 +105,7 @@
     <ClInclude Include="src\Instrument.h" />
     <ClInclude Include="src\InstrumentManager.h" />
     <ClInclude Include="src\Instruments\Confetti.h" />
+    <ClInclude Include="src\Instruments\Eraser.h" />
     <ClInclude Include="src\Instruments\Pencil.h" />
     <ClInclude Include="src\Instruments\Spray.h" />
     <ClInclude Include="src\InstrumentTypes.h" />
