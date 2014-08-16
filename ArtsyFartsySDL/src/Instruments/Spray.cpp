@@ -13,19 +13,6 @@ void Spray::DrawShape(SDL_Renderer *renderer, Shape *shape, bool incremental)
     ShapeBlock *secondBlock = nullptr;
     bool willDraw = firstBlock->drawn == false;
 
-    if (blockIndex + 1 < shapeBlocks->size())
-    {
-      secondBlock = shapeBlocks->at(blockIndex + 1);
-      if ((blockIndex == 0 && shapeBlocks->size() == 2))
-      {
-        willDraw = true;
-      }
-    }
-    else if (shapeBlocks->size() > 1)
-    {
-      continue;
-    }
-
     if (willDraw)
     {
       DrawBlock(renderer, firstBlock, secondBlock);
@@ -43,20 +30,39 @@ void Spray::DrawBlock(SDL_Renderer *renderer, ShapeBlock *firstBlock, ShapeBlock
 {
   int x1 = firstBlock->x;
   int y1 = firstBlock->y;
-  int x2 = firstBlock->x;
-  int y2 = firstBlock->y;
-  int size = firstBlock->brushSize / 2;
+  int size = firstBlock->brushSize;
   ColorRGBA color = firstBlock->brushColor;
 
-  if (secondBlock != nullptr)
-  {
-    x2 = secondBlock->x;
-    y2 = secondBlock->y;
-    size = firstBlock->brushSize;
-  }
+  int variance = size * 10;
+  int offset = variance / 2;//(size * 5);
+  static int colorOffset = 50;
+  static int halfOffset = colorOffset / 2;
 
-  thickLineRGBA(renderer,
-    x1, y1, x2, y2,
-    size,
-    color.r, color.g, color.b, color.a);
+  int rOffset = ((rand() % halfOffset));
+  int gOffset = ((rand() % halfOffset));
+  int bOffset = ((rand() % halfOffset));
+
+  int r = color.r - rOffset;
+  int g = color.g - gOffset;
+  int b = color.b - bOffset;
+
+  ColorRGBA newColor(r < 0 ? 0 : r,
+    g < 0 ? 0 : g,
+    b < 0 ? 0 : b,
+    color.a);
+
+  for (int i = 0; i < 10; i++)
+  {
+    int newSize = size + (rand() % 4) - 2;
+    if (newSize < 1)
+    {
+      newSize = 1;
+    }
+
+    filledCircleRGBA(renderer,
+      x1 + (rand() % variance) - offset,
+      y1 + (rand() % variance) - offset,
+      size + (rand() % 4) - 2,
+      newColor.r, newColor.g, newColor.b, color.a);
+  }
 }

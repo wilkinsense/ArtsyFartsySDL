@@ -2,6 +2,7 @@
 #include "../Instrument.h"
 #include "../Instruments\Pencil.h"
 #include "../Instruments\Confetti.h"
+#include "../Instruments/Spray.h"
 #include "../InstrumentTypes.h"
 #include "../InstrumentManager.h"
 #include <vector>
@@ -12,6 +13,7 @@ ReplayScreen::ReplayScreen()
 {
   mInstruments.insert(std::pair<int, Instrument *>(BRUSHTYPE_PENCIL, new Pencil()));
   mInstruments.insert(std::pair<int, Instrument *>(BRUSHTYPE_CONFETTI, new Confetti()));
+  mInstruments.insert(std::pair<int, Instrument *>(BRUSHTYPE_SPRAY, new Spray()));
 }
 
 ReplayScreen::~ReplayScreen()
@@ -77,6 +79,10 @@ void ReplayScreen::Draw(SDL_Renderer *renderer)
           willDraw = true;
           mLastTimestamp = mCurrentTimestamp;
         }
+      }
+      if (blocks->size() == 1)
+      {
+        willDraw = true;
       }
     }
 

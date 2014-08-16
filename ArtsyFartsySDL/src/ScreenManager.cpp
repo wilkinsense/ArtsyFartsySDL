@@ -147,3 +147,8 @@ SDL_Renderer* ScreenManager::GetRenderer() const
 {
   return mRenderer;
 }
+
+SDL_Window* ScreenManager::GetWindow() const
+{
+  return mWindow;
+}

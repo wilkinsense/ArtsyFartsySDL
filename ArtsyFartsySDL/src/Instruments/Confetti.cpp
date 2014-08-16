@@ -52,6 +52,21 @@ void Confetti::DrawBlock(SDL_Renderer *renderer, ShapeBlock *firstBlock, ShapeBl
 
   int variance = size * 10;
   int offset = variance / 2;//(size * 5);
+  static int colorOffset = 50;
+  static int halfOffset = 25;
+
+  int rOffset = ((rand() % halfOffset));
+  int gOffset = ((rand() % halfOffset));
+  int bOffset = ((rand() % halfOffset));
+
+  int r = color.r - rOffset;
+  int g = color.g - gOffset;
+  int b = color.b - bOffset;
+
+  ColorRGBA newColor(r < 0 ? r + 128 : r,
+    g < 0 ? g + 128 : g,
+    b < 0 ? b + 128 : b,
+    color.a);
 
   thickLineRGBA(renderer,
     x1 + (rand() % variance) - offset,
@@ -59,8 +74,5 @@ void Confetti::DrawBlock(SDL_Renderer *renderer, ShapeBlock *firstBlock, ShapeBl
     x2 + (rand() % variance) - offset,
     y2 + (rand() % variance) - offset,
     size,
-    color.r - (rand() % 50),
-    color.g - (rand() % 50),
-    color.b - (rand() % 50),
-    color.a);
+    newColor.r, newColor.g, newColor.b, color.a);
 }

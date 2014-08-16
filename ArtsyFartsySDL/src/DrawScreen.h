@@ -27,7 +27,11 @@ protected:
   std::vector<ColourButton *> mButtons;
 
   void CheckInput(SDL_Event e);
+  bool IsWithinButton(int x, int y, ColourButton **button);
 
   int mButtonsX, mButtonsY;
   int mButtonsOffsetX, mButtonsOffsetY;
+  bool mWithinButtons;
+
+  SDL_Texture *mBackBuffer;
 };
