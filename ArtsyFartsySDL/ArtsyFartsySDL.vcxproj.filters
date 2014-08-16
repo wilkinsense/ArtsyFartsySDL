@@ -13,6 +13,9 @@
     <Filter Include="src\Screens">
       <UniqueIdentifier>{b6386f2d-7d45-4645-8b22-60839b90ab01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Buttons">
+      <UniqueIdentifier>{312f90dd-4f57-4b50-985b-50f3200d4250}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -52,7 +55,13 @@
       <Filter>src\Screens</Filter>
     </ClCompile>
     <ClCompile Include="src\Buttons\ColourButton.cpp">
-      <Filter>src\Screens</Filter>
+      <Filter>src\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Buttons\SelectableButton.cpp">
+      <Filter>src\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Buttons\InstrumentButton.cpp">
+      <Filter>src\Buttons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -102,7 +111,13 @@
       <Filter>src\Screens</Filter>
     </ClInclude>
     <ClInclude Include="src\Buttons\ColourButton.h">
-      <Filter>src\Screens</Filter>
+      <Filter>src\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Buttons\SelectableButton.h">
+      <Filter>src\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Buttons\InstrumentButton.h">
+      <Filter>src\Buttons</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -35,4 +35,22 @@ public:
     InputManager::GetInstance()->RemoveEvent(SDL_MOUSEBUTTONUP, (InputEvent)&InstrumentWrapper::InputEnded);
     InputManager::GetInstance()->RemoveEvent(SDL_MOUSEMOTION, (InputEvent)&InstrumentWrapper::InputMoved);
   }
+
+  static void ChangeToPen()
+  {
+    InstrumentManager *im = InstrumentManager::GetInstance();
+    im->SetBrushType(BRUSHTYPE_PENCIL);
+  }
+
+  static void ChangeToConfetti()
+  {
+    InstrumentManager *im = InstrumentManager::GetInstance();
+    im->SetBrushType(BRUSHTYPE_CONFETTI);
+  }
+
+  static void ChangeToSpray()
+  {
+    InstrumentManager *im = InstrumentManager::GetInstance();
+    im->SetBrushType(BRUSHTYPE_SPRAY);
+  }
 };

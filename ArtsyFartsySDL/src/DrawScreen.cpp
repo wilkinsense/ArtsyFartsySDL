@@ -8,6 +8,7 @@
 #include "Instruments\Confetti.h"
 #include "Instruments\Spray.h"
 #include "Buttons\ColourButton.h"
+#include "Buttons\InstrumentButton.h"
 #include <SDL_image.h>
 #include "ScreenManager.h"
 
@@ -28,6 +29,21 @@ DrawScreen::DrawScreen()
   {
     SDL_Surface *buttonSurface = IMG_Load("res/button.png");
     mButtonTexture = SDL_CreateTextureFromSurface(renderer, buttonSurface);
+
+    SDL_Surface *pencilButtonSurface = IMG_Load("res/pencilbutton.png");
+    mPencilTexture = SDL_CreateTextureFromSurface(renderer, pencilButtonSurface);
+
+    SDL_Surface *confettiSurface = IMG_Load("res/confettibutton.png");
+    mConfettiTexture = SDL_CreateTextureFromSurface(renderer, confettiSurface);
+
+    SDL_Surface *sprayButtonSurface = IMG_Load("res/spraybutton.png");
+    mSprayTexture = SDL_CreateTextureFromSurface(renderer, sprayButtonSurface);
+
+    IMG_Quit();
+
+    mInstrumentButtons.insert(std::pair<int, InstrumentButton *>(BRUSHTYPE_PENCIL, new InstrumentButton(mPencilTexture, 600, 300)));
+    mInstrumentButtons.insert(std::pair<int, InstrumentButton *>(BRUSHTYPE_CONFETTI, new InstrumentButton(mConfettiTexture, 700, 300)));
+    mInstrumentButtons.insert(std::pair<int, InstrumentButton *>(BRUSHTYPE_SPRAY, new InstrumentButton(mSprayTexture, 800, 300)));
   }
 
   int width, height;
@@ -64,8 +80,20 @@ DrawScreen::~DrawScreen()
     delete button;
   }
 
+  for (auto instButtonItr = mInstrumentButtons.begin(); instButtonItr != mInstrumentButtons.end(); instButtonItr++)
+  {
+    InstrumentButton *button = instButtonItr->second;
+    delete button;
+  }
+
   mInstruments.clear();
   mButtons.clear();
+  mInstrumentButtons.clear();
+
+  SDL_DestroyTexture(mButtonTexture);
+  SDL_DestroyTexture(mPencilTexture);
+  SDL_DestroyTexture(mConfettiTexture);
+  SDL_DestroyTexture(mSprayTexture);
 }
 
 void DrawScreen::OnEnter()
@@ -174,6 +202,12 @@ void DrawScreen::Draw(SDL_Renderer *renderer)
     ColourButton *button = *buttonItr;
     button->Draw(renderer);
   }
+
+  for (auto buttonItr = mInstrumentButtons.begin(); buttonItr != mInstrumentButtons.end(); buttonItr++)
+  {
+    InstrumentButton *button = buttonItr->second;
+    button->Draw(renderer);
+  }
 }
 
 void DrawScreen::CheckInput(SDL_Event e)
@@ -189,6 +223,18 @@ void DrawScreen::CheckInput(SDL_Event e)
       printf("Changing colours!");
       ColorRGBA color = button->GetColor();
       InstrumentManager::GetInstance()->SetBrushColor(color);
+    }
+    else if (mInstrumentButtons[BRUSHTYPE_PENCIL]->IsPointWithinButton(x, y))
+    {
+      InstrumentWrapper::ChangeToPen();
+    }
+    else if (mInstrumentButtons[BRUSHTYPE_CONFETTI]->IsPointWithinButton(x, y))
+    {
+      InstrumentWrapper::ChangeToConfetti();
+    }
+    else if (mInstrumentButtons[BRUSHTYPE_SPRAY]->IsPointWithinButton(x, y))
+    {
+      InstrumentWrapper::ChangeToSpray();
     }
     else
     {
@@ -214,21 +260,15 @@ bool DrawScreen::IsWithinButton(int x, int y, ColourButton **button)
   bool foundInput = false;
   for (auto buttonItr = mButtons.begin(); buttonItr != mButtons.end(); buttonItr++)
   {
-    int diffX = abs(x - xPos - halfWidth);
-    int diffY = abs(y - yPos - halfWidth);
-    float diff = sqrtf((diffX * diffX) + (diffY * diffY));
-    if (diff <= halfWidth)
+    foundInput = (*buttonItr)->IsPointWithinButton(x, y);
+    if (foundInput)
     {
-      foundInput = true;
       if (button != nullptr)
       {
         *button = (*buttonItr);
       }
       break;
     }
-
-    xPos += mButtonsOffsetX;
-    yPos += mButtonsOffsetY;
   }
 
   return foundInput;

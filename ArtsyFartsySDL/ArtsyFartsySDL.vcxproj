@@ -71,6 +71,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Buttons\ColourButton.cpp" />
+    <ClCompile Include="src\Buttons\InstrumentButton.cpp" />
+    <ClCompile Include="src\Buttons\SelectableButton.cpp" />
     <ClCompile Include="src\DrawScreen.cpp" />
     <ClCompile Include="src\HistoryManager.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
@@ -86,6 +88,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Buttons\ColourButton.h" />
+    <ClInclude Include="src\Buttons\InstrumentButton.h" />
+    <ClInclude Include="src\Buttons\SelectableButton.h" />
     <ClInclude Include="src\ColorHelper.h" />
     <ClInclude Include="src\DrawScreen.h" />
     <ClInclude Include="src\HistoryManager.h" />

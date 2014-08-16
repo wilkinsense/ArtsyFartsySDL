@@ -5,14 +5,12 @@
 struct SDL_Texture;
 struct SDL_Renderer;
 
-class ColourButton: public SelectableButton
+class InstrumentButton : public SelectableButton
 {
 public:
-  ColourButton(SDL_Texture *buttonTexture, ColorRGBA color, int x, int y);
+  InstrumentButton(SDL_Texture *buttonTexture, int x, int y);
 
   void Draw(SDL_Renderer *renderer);
-  ColorRGBA GetColor();
 
 protected:
-  ColorRGBA mButtonColor;
 };

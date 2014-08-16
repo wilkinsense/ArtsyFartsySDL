@@ -2,13 +2,9 @@
 #include <SDL.h>
 #include <SDL2_gfxPrimitives.h>
 
-ColourButton::ColourButton(SDL_Texture *buttonTexture, ColorRGBA colour, int x, int y)
+ColourButton::ColourButton(SDL_Texture *buttonTexture, ColorRGBA colour, int x, int y) : SelectableButton(buttonTexture, x, y)
 {
-  mButtonTexture = buttonTexture;
   mButtonColor = colour;
-  
-  SetX(x);
-  SetY(y);
 }
 
 void ColourButton::Draw(SDL_Renderer *renderer)
@@ -27,14 +23,4 @@ void ColourButton::Draw(SDL_Renderer *renderer)
 ColorRGBA ColourButton::GetColor()
 {
   return mButtonColor;
-}
-
-void ColourButton::SetX(int x)
-{
-  mPositionX = x;
-}
-
-void ColourButton::SetY(int y)
-{
-  mPositionY = y;
 }

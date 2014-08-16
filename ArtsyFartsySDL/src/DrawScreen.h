@@ -6,7 +6,9 @@
 
 class Instrument;
 struct SDL_Texture;
+
 class ColourButton;
+class InstrumentButton;
 
 class DrawScreen : public Screen
 {
@@ -24,7 +26,14 @@ protected:
   std::map<int, Instrument *> mInstruments;
 
   SDL_Texture *mButtonTexture;
+  SDL_Texture *mPencilTexture;
+  SDL_Texture *mSprayTexture;
+  SDL_Texture *mConfettiTexture;
+
   std::vector<ColourButton *> mButtons;
+  InstrumentButton *mPencilButton;
+  InstrumentButton *mSprayButton;
+  std::map<int, InstrumentButton *> mInstrumentButtons;
 
   void CheckInput(SDL_Event e);
   bool IsWithinButton(int x, int y, ColourButton **button);
