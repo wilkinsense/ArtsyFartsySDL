@@ -53,7 +53,7 @@ DrawScreen::DrawScreen()
     SDL_Surface *sprayButtonSurface = IMG_Load("res/spraybutton.png");
     mSprayTexture = SDL_CreateTextureFromSurface(renderer, sprayButtonSurface);
 
-    SDL_Surface *eraserButtonSurface = IMG_Load("res/confettibutton.png");
+    SDL_Surface *eraserButtonSurface = IMG_Load("res/eraserbutton.png");
     mEraserTexture = SDL_CreateTextureFromSurface(renderer, eraserButtonSurface);
 
     IMG_Quit();
@@ -63,12 +63,11 @@ DrawScreen::DrawScreen()
     mInstrumentButtons.insert(std::pair<int, InstrumentButton *>(BRUSHTYPE_CONFETTI, new InstrumentButton(mConfettiTexture, width - 140, height - 70)));
     mInstrumentButtons.insert(std::pair<int, InstrumentButton *>(BRUSHTYPE_PENCIL, new InstrumentButton(mPencilTexture, width - 210, height - 70)));
 
-
     int xPosOffset = -70;
     int xPos = width + xPosOffset, yPos = height - 70;
-    for (auto buttonItr = mInstrumentButtons.begin(); buttonItr != mInstrumentButtons.end(); buttonItr++)
+    for (int brushType = BRUSHTYPE_COUNT - 1; brushType >= 0; brushType--)
     {
-      InstrumentButton *button = buttonItr->second;
+      InstrumentButton *button = mInstrumentButtons[(BrushType)brushType];
       button->SetX(xPos);
       button->SetY(yPos);
 
