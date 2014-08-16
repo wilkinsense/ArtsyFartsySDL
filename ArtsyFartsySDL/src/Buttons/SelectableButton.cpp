@@ -26,7 +26,7 @@ bool SelectableButton::IsPointWithinButton(int x, int y)
 
   int diffX = abs(x - mPositionX - halfWidth);
   int diffY = abs(y - mPositionY - halfWidth);
-  float diff = sqrtf((diffX * diffX) + (diffY * diffY));
+  float diff = sqrtf((float)((diffX * diffX) + (diffY * diffY)));
   if (diff <= halfWidth)
   {
     foundInput = true;

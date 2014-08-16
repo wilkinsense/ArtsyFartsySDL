@@ -24,14 +24,14 @@ public:
   bool IsRunning();
   void SetIsRunning(bool running);
 
+  void ClearRenderer();
+
   SDL_Renderer* GetRenderer() const;
   SDL_Window* GetWindow() const;
 
 protected:
   static ScreenManager *kInstance;
   ScreenManager();
-
-  void ClearRenderer();
 
   std::map<std::string, Screen *> mScreens;
   Screen *mActiveScreen;

@@ -8,7 +8,7 @@ typedef void(*InputEvent)(SDL_Event e);
 typedef void(IInput::*InputMemberEvent)(SDL_Event e);
 
 class InputBlock;
-class InputPair;
+struct InputPair;
 
 class InputManager
 {

@@ -24,6 +24,18 @@ DrawScreen::DrawScreen()
   SDL_Window *window = ScreenManager::GetInstance()->GetWindow();
   SDL_Renderer *renderer = ScreenManager::GetInstance()->GetRenderer();
 
+  int width, height;
+  SDL_GetWindowSize(window, &width, &height);
+  mBackBuffer = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
+
+  SDL_Texture *oldTexture = SDL_GetRenderTarget(renderer);
+  int success = SDL_SetRenderTarget(renderer, mBackBuffer);
+
+  SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
+  SDL_RenderClear(renderer);
+
+  SDL_SetRenderTarget(renderer, oldTexture);
+
   int result = IMG_Init(IMG_INIT_PNG);
   if (result & IMG_INIT_PNG)
   {
@@ -41,22 +53,10 @@ DrawScreen::DrawScreen()
 
     IMG_Quit();
 
-    mInstrumentButtons.insert(std::pair<int, InstrumentButton *>(BRUSHTYPE_PENCIL, new InstrumentButton(mPencilTexture, 600, 300)));
-    mInstrumentButtons.insert(std::pair<int, InstrumentButton *>(BRUSHTYPE_CONFETTI, new InstrumentButton(mConfettiTexture, 700, 300)));
-    mInstrumentButtons.insert(std::pair<int, InstrumentButton *>(BRUSHTYPE_SPRAY, new InstrumentButton(mSprayTexture, 800, 300)));
+    mInstrumentButtons.insert(std::pair<int, InstrumentButton *>(BRUSHTYPE_PENCIL, new InstrumentButton(mPencilTexture, width - 210, height - 70)));
+    mInstrumentButtons.insert(std::pair<int, InstrumentButton *>(BRUSHTYPE_CONFETTI, new InstrumentButton(mConfettiTexture, width - 140, height - 70)));
+    mInstrumentButtons.insert(std::pair<int, InstrumentButton *>(BRUSHTYPE_SPRAY, new InstrumentButton(mSprayTexture, width - 70, height - 70)));
   }
-
-  int width, height;
-  SDL_GetWindowSize(window, &width, &height);
-  mBackBuffer = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
-  
-  SDL_Texture *oldTexture = SDL_GetRenderTarget(renderer);
-  int success = SDL_SetRenderTarget(renderer, mBackBuffer);
-
-  SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
-  SDL_RenderClear(renderer);
-
-  SDL_SetRenderTarget(renderer, oldTexture);
 
   mButtons.push_back(new ColourButton(mButtonTexture, ColorRGBA(0xFF, 0x0, 0x00, 0xFF), mButtonsX, mButtonsY)); // red
   mButtons.push_back(new ColourButton(mButtonTexture, ColorRGBA(0xFF, 0xFF, 0x00, 0xFF), mButtonsX, mButtonsY)); // yellow

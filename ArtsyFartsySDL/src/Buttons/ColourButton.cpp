@@ -11,7 +11,7 @@ void ColourButton::Draw(SDL_Renderer *renderer)
 {
   int width = 60, height = 60;
   int halfWidth = width / 2, halfHeight = height / 2;
-  int size = ((float)halfWidth * 0.94f);
+  int size = (int)((float)halfWidth * 0.94f);
 
   filledCircleRGBA(renderer, mPositionX + halfWidth, mPositionY + halfHeight, size, mButtonColor.r, mButtonColor.g, mButtonColor.b, mButtonColor.a);
   aacircleRGBA(renderer, mPositionX + halfWidth, mPositionY + halfHeight, size, mButtonColor.r, mButtonColor.g, mButtonColor.b, mButtonColor.a);

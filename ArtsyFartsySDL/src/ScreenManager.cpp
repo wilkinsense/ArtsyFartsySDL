@@ -53,7 +53,7 @@ bool ScreenManager::ShowScreen(std::string id)
       mActiveScreen->OnExit();
     }
 
-    ClearRenderer();
+    //ClearRenderer();
 
     mActiveScreen = screenItr->second;
     mActiveScreen->OnEnter();

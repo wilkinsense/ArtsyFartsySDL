@@ -42,6 +42,10 @@
     <IncludePath>$(SDL_gfx)\include;$(SDL_image)\include;$(SDL)\include;$(WWISESDK)\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SDL)\lib\x64;$(SDL_image)\lib\x86;$(SDL_gfx)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(SDL_gfx)\include;$(SDL_image)\include;$(SDL)\include;$(WWISESDK)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SDL)\lib\x64;$(SDL_image)\lib\x86;$(SDL_gfx)\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -67,6 +71,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SDL)\lib\x86;$(WWISESDK)\Win32_vc120\Debug\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2_image.lib;SDL2_gfx.lib;OpenGL32.lib;SDL2.lib;SDL2main.lib;AkAudioInputSource.lib;AkCompressorFX.lib;AkConvolutionReverbFX.lib;AkDelayFX.lib;AkExpanderFX.lib;AkFlangerFX.lib;AkGainFX.lib;AkGuitarDistortionFX.lib;AkHarmonizerFX.lib;AkMatrixReverbFX.lib;AkMemoryMgr.lib;AkMeterFX.lib;AkMotionGenerator.lib;AkMP3Source.lib;AkMusicEngine.lib;AkParametricEQFX.lib;AkPeakLimiterFX.lib;AkPitchShifterFX.lib;AkRoomVerbFX.lib;AkRumble.lib;AkSilenceSource.lib;AkSineSource.lib;AkSoundEngine.lib;AkSoundEngineDLL.lib;AkSoundSeedImpactFX.lib;AkSoundSeedWind.lib;AkSoundSeedWoosh.lib;AkStereoDelayFX.lib;AkStreamMgr.lib;AkTimeStretchFX.lib;AkToneSource.lib;AkTremoloFX.lib;AkVorbisDecoder.lib;AstoundsoundExpanderFX.lib;AstoundsoundFolddownFX.lib;AstoundsoundRTIFX.lib;AstoundsoundShared.lib;CommunicationCentral.lib;CrankcaseAudioREVModelPlayerFX.lib;iZHybridReverbFX.lib;iZTrashBoxModelerFX.lib;iZTrashDelayFX.lib;iZTrashDistortionFX.lib;iZTrashDynamicsFX.lib;iZTrashFiltersFX.lib;iZTrashMultibandDistortionFX.lib;McDSPFutzBoxFX.lib;McDSPLimiterFX.lib;SFLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

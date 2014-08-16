@@ -19,7 +19,6 @@ class TestClass
 {
 public:
   void InputDispatch(SDL_Event e);
-  void ChangeInstrument();
   void ShowReplay();
 
   void IncreaseBrushSize();
@@ -62,10 +61,6 @@ void TestClass::InputDispatch(SDL_Event e)
     ShowReplay();
     break;
 
-  case SDLK_q:
-    ChangeInstrument();
-    break;
-
   case SDLK_z:
     DecreaseBrushize();
     break;
@@ -76,18 +71,21 @@ void TestClass::InputDispatch(SDL_Event e)
   }
 }
 
-void TestClass::ChangeInstrument()
-{
-  printf("Changed instrument.\n");
-
-  InstrumentManager *im = InstrumentManager::GetInstance();
-  im->SetBrushType((BrushType)((im->GetBrushType() + 1) % BRUSHTYPE_COUNT));
-}
-
 void TestClass::ShowReplay()
 {
+  static bool showingDraw = true;
   ScreenManager *sm = ScreenManager::GetInstance();
-  sm->ShowScreen("REPLAY");
+  if (showingDraw == true)
+  {
+    sm->ShowScreen("REPLAY");
+    showingDraw = false;
+  }
+  else
+  {
+    sm->ShowScreen("DRAW");
+    showingDraw = true;
+  }
+  
 }
 
 void TestClass::IncreaseBrushSize()
