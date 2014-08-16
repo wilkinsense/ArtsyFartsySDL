@@ -128,7 +128,14 @@ void InstrumentManager::GetCurrentInput(SDL_Event e)
   currentShape->AddBlock(currentBlock);
 }
 
-void InstrumentManager::DrawShapes(BrushType type)
+void InstrumentManager::ClearAllShapes()
 {
-  
+  for (auto shapes = mShapes.begin(); shapes != mShapes.end(); shapes++)
+  {
+    auto shape = (*shapes);
+    shape->Clear();
+    delete shape;
+  }
+
+  mShapes.clear();
 }

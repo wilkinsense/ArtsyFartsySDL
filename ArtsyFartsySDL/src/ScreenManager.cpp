@@ -146,6 +146,11 @@ void ScreenManager::ClearRenderer()
 {
   SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
   SDL_RenderClear(mRenderer);
+
+  if (mActiveScreen != nullptr)
+  {
+    mActiveScreen->Clear();
+  }
 }
 
 SDL_Renderer* ScreenManager::GetRenderer() const

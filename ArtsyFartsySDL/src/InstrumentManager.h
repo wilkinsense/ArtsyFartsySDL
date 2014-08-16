@@ -25,6 +25,8 @@ public:
 
   const std::vector<Shape *>* GetActiveShapes();
 
+  void ClearAllShapes();
+
 private:
   static InstrumentManager *kInstance;
   InstrumentManager();
@@ -37,8 +39,6 @@ private:
   Shape *currentShape;
 
   void GetCurrentInput(SDL_Event e);
-
-  void DrawShapes(BrushType type);
 
   SDL_EventType mInstrumentState;
 };

@@ -19,11 +19,14 @@ class TestClass
 {
 public:
   void InputDispatch(SDL_Event e);
+  void ClearScreen();
   void ShowReplay();
 
   void IncreaseBrushSize();
   void DecreaseBrushize();
 };
+
+bool showingReplay = false;
 
 int main(int argc, char ** argv)
 {
@@ -61,6 +64,10 @@ void TestClass::InputDispatch(SDL_Event e)
     ShowReplay();
     break;
 
+  case SDLK_ESCAPE:
+    ClearScreen();
+    break;
+
   case SDLK_z:
     DecreaseBrushize();
     break;
@@ -71,19 +78,27 @@ void TestClass::InputDispatch(SDL_Event e)
   }
 }
 
+void TestClass::ClearScreen()
+{
+  if (showingReplay == false)
+  {
+    InstrumentManager::GetInstance()->ClearAllShapes();
+    ScreenManager::GetInstance()->ClearRenderer();
+  }
+}
+
 void TestClass::ShowReplay()
 {
-  static bool showingDraw = true;
   ScreenManager *sm = ScreenManager::GetInstance();
-  if (showingDraw == true)
+  if (showingReplay == false)
   {
     sm->ShowScreen("REPLAY");
-    showingDraw = false;
+    showingReplay = true;
   }
   else
   {
     sm->ShowScreen("DRAW");
-    showingDraw = true;
+    showingReplay = false;
   }
   
 }

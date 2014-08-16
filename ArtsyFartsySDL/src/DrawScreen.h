@@ -22,6 +22,8 @@ public:
   void Update(const SDL_Event &e);
   void Draw(SDL_Renderer *renderer);
 
+  void Clear();
+
 protected:
   std::map<int, Instrument *> mInstruments;
 

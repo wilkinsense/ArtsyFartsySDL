@@ -303,3 +303,14 @@ bool DrawScreen::IsWithinButton(int x, int y, ColourButton **button)
 
   return foundInput;
 }
+
+void DrawScreen::Clear()
+{
+  SDL_Renderer *renderer = ScreenManager::GetInstance()->GetRenderer();
+  SDL_Texture *oldTexture = SDL_GetRenderTarget(renderer);
+  int success = SDL_SetRenderTarget(renderer, mBackBuffer);
+
+  SDL_RenderClear(renderer);
+
+  SDL_SetRenderTarget(renderer, oldTexture);
+}

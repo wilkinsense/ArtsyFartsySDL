@@ -25,6 +25,7 @@ public:
 
   void AddBlock(const ShapeBlock &block);
   const std::vector<ShapeBlock *>* GetBlocks();
+  void Clear();
 
   bool drawn;
   BrushType brushType;

@@ -15,3 +15,14 @@ const std::vector<ShapeBlock *>* Shape::GetBlocks()
 {
   return &mBlocks;
 }
+
+void Shape::Clear()
+{
+  for (auto blocks = mBlocks.begin(); blocks != mBlocks.end(); blocks++)
+  {
+    ShapeBlock *block = (*blocks);
+    delete block;
+  }
+
+  mBlocks.clear();
+}
