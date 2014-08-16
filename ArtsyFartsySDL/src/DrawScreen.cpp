@@ -47,6 +47,7 @@ DrawScreen::DrawScreen()
   mButtons.push_back(new ColourButton(mButtonTexture, ColorRGBA(0xFF, 0x0, 0xFF, 0xFF), mButtonsX, mButtonsY)); // purple
   mButtons.push_back(new ColourButton(mButtonTexture, ColorRGBA(0x00, 0x0, 0xFF, 0xFF), mButtonsX, mButtonsY)); // blue
   mButtons.push_back(new ColourButton(mButtonTexture, ColorRGBA(0x00, 0xFF, 0x00, 0xFF), mButtonsX, mButtonsY)); // green
+  mButtons.push_back(new ColourButton(mButtonTexture, ColorRGBA(0x80, 0x40, 0x00, 0xFF), mButtonsX, mButtonsY)); // brown
 }
 
 DrawScreen::~DrawScreen()

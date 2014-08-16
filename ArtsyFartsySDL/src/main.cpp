@@ -21,7 +21,6 @@ public:
   void InputDispatch(SDL_Event e);
   void ChangeInstrument();
   void ShowReplay();
-  void FingerMotion();
 
   void IncreaseBrushSize();
   void DecreaseBrushize();
@@ -31,8 +30,6 @@ int main(int argc, char ** argv)
 {
   TestClass c;
   InputManager::GetInstance()->AssignEvent(SDL_KEYDOWN, &c, (InputMemberEvent)(&TestClass::InputDispatch));
-
-  InputManager::GetInstance()->AssignEvent(SDL_FINGERMOTION, &c, (InputMemberEvent)(&TestClass::FingerMotion));
 
   DrawScreen draw;
   ReplayScreen replay;
@@ -91,11 +88,6 @@ void TestClass::ShowReplay()
 {
   ScreenManager *sm = ScreenManager::GetInstance();
   sm->ShowScreen("REPLAY");
-}
-
-void TestClass::FingerMotion()
-{
-  printf("FUUUUUUUCK\n");
 }
 
 void TestClass::IncreaseBrushSize()
