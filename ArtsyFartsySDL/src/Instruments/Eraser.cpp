@@ -39,7 +39,7 @@ void Eraser::DrawBlock(SDL_Renderer *renderer, ShapeBlock *firstBlock, ShapeBloc
 {
   int x1 = firstBlock->x;
   int y1 = firstBlock->y;
-  int size = firstBlock->brushSize * 4;
+  int size = firstBlock->brushSize;
 
   filledCircleRGBA(renderer,
     x1, y1, size,
