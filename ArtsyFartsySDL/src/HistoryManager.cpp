@@ -12,3 +12,14 @@ HistoryManager* HistoryManager::GetInstance()
 
     return kInstance;
 }
+
+void HistoryManager::SetRandomSeed(uint32_t randomSeed)
+{
+    srand(randomSeed);
+    mRandomSeed = randomSeed;
+}
+
+uint32_t HistoryManager::GetRandomSeed()
+{
+    return mRandomSeed;
+}

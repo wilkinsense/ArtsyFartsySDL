@@ -49,6 +49,8 @@ void ReplayScreen::OnEnter()
 
     mLastTimestamp = SDL_GetTicks();
 
+    // Reset the random seed so that we effectly recreate all of the previous random calculations.
+    HistoryManager::GetInstance()->SetRandomSeed(HistoryManager::GetInstance()->GetRandomSeed());
 
     /* Clear the screen. */
     ScreenManager::GetInstance()->ClearRenderer();

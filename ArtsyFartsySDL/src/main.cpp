@@ -37,6 +37,8 @@ int main(int argc, char** argv)
     DrawScreen draw;
     ReplayScreen replay;
 
+    HistoryManager::GetInstance()->SetRandomSeed(time(0));
+
     ScreenManager* screenManager = ScreenManager::GetInstance();
     screenManager->PushScreen("DRAW", &draw);
     screenManager->PushScreen("REPLAY", &replay);
