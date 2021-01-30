@@ -5,10 +5,10 @@ HistoryManager* HistoryManager::kInstance = nullptr;
 
 HistoryManager* HistoryManager::GetInstance()
 {
-  if (kInstance == nullptr)
-  {
-    kInstance = new HistoryManager();
-  }
+    if (kInstance == nullptr)
+    {
+        kInstance = new HistoryManager();
+    }
 
-  return kInstance;
+    return kInstance;
 }

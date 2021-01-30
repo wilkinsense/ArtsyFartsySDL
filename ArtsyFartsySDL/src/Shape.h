@@ -1,35 +1,35 @@
 #pragma once
 
-#include <SDL.h>
-#include <vector>
 #include "ColorHelper.h"
 #include "InstrumentTypes.h"
+#include <SDL.h>
+#include <vector>
 
 struct ShapeBlock
 {
-  Uint32 timestamp;
-  unsigned int x;
-  unsigned int y;
-  int brushSize;
-  //BrushType brushType;
-  ColorRGBA brushColor;
-  bool drawn;
+    Uint32 timestamp;
+    unsigned int x;
+    unsigned int y;
+    int brushSize;
+    //BrushType brushType;
+    ColorRGBA brushColor;
+    bool drawn;
 
-  ShapeBlock() : drawn(false) {}
+    ShapeBlock() : drawn(false) {}
 };
 
 class Shape
 {
 public:
-  Shape();
+    Shape();
 
-  void AddBlock(const ShapeBlock &block);
-  const std::vector<ShapeBlock *>* GetBlocks();
-  void Clear();
+    void AddBlock(const ShapeBlock& block);
+    const std::vector<ShapeBlock*>* GetBlocks();
+    void Clear();
 
-  bool drawn;
-  BrushType brushType;
+    bool drawn;
+    BrushType brushType;
 
 protected:
-  std::vector<ShapeBlock *> mBlocks;
+    std::vector<ShapeBlock*> mBlocks;
 };

@@ -1,7 +1,9 @@
 #pragma once
-#include <SDL_events.h>
+
 #include "ColorHelper.h"
 #include "InstrumentTypes.h"
+#include <SDL_events.h>
+#include <time.h>
 #include <vector>
 
 class Shape;
@@ -9,36 +11,36 @@ class Shape;
 class InstrumentManager
 {
 public:
-  static InstrumentManager* GetInstance();
-  static void DestroyInstance();
-  
-  int       GetBrushSize();
-  BrushType GetBrushType();
-  ColorRGBA GetBrushColor();
-  void      SetBrushSize(int size);
-  void      SetBrushType(BrushType type);
-  void      SetBrushColor(ColorRGBA color);
+    static InstrumentManager* GetInstance();
+    static void DestroyInstance();
 
-  void      InputBegan(SDL_Event e);
-  void      InputMoved(SDL_Event e);
-  void      InputEnded(SDL_Event e);
+    int       GetBrushSize();
+    BrushType GetBrushType();
+    ColorRGBA GetBrushColor();
+    void      SetBrushSize(int size);
+    void      SetBrushType(BrushType type);
+    void      SetBrushColor(ColorRGBA color);
 
-  const std::vector<Shape *>* GetActiveShapes();
+    void      InputBegan(SDL_Event e);
+    void      InputMoved(SDL_Event e);
+    void      InputEnded(SDL_Event e);
 
-  void ClearAllShapes();
+    const std::vector<Shape*>* GetActiveShapes();
+
+    void ClearAllShapes();
 
 private:
-  static InstrumentManager *kInstance;
-  InstrumentManager();
+    static InstrumentManager* kInstance;
+    InstrumentManager();
 
-  BrushType mBrushType;
-  int       mBrushSize;
-  ColorRGBA mBrushColor;
+    BrushType mBrushType;
+    int       mBrushSize;
+    ColorRGBA mBrushColor;
 
-  std::vector<Shape *> mShapes;
-  Shape *currentShape;
+    std::vector<Shape*> mShapes;
+    Shape* currentShape;
 
-  void GetCurrentInput(SDL_Event e);
+    void GetCurrentInput(SDL_Event e);
 
-  SDL_EventType mInstrumentState;
+    SDL_EventType mInstrumentState;
 };

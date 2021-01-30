@@ -1,141 +1,141 @@
-#include "InstrumentManager.h"
 #include "HistoryManager.h"
-#include <iostream>
+#include "InstrumentManager.h"
 #include "Shape.h"
+#include <iostream>
 #include <SDL.h>
 
 InstrumentManager* InstrumentManager::kInstance = NULL;
 
 InstrumentManager* InstrumentManager::GetInstance()
 {
-  if (kInstance == nullptr)
-  {
-    kInstance = new InstrumentManager();
-  }
+    if (kInstance == nullptr)
+    {
+        kInstance = new InstrumentManager();
+    }
 
-  return kInstance;
+    return kInstance;
 }
 
 void InstrumentManager::DestroyInstance()
 {
-  if (kInstance != nullptr)
-  {
-    delete kInstance;
-    kInstance = nullptr;
-  }
+    if (kInstance != nullptr)
+    {
+        delete kInstance;
+        kInstance = nullptr;
+    }
 }
 
 InstrumentManager::InstrumentManager() :
-mBrushSize(5), 
-mBrushType(BRUSHTYPE_PENCIL),
-mBrushColor(ColorRGBA(0x00, 0xFF, 0x00, 0xFF)),
-mInstrumentState(SDL_MOUSEBUTTONUP)
+    mBrushSize(5),
+    mBrushType(BRUSHTYPE_PENCIL),
+    mBrushColor(ColorRGBA(0x00, 0xFF, 0x00, 0xFF)),
+    mInstrumentState(SDL_MOUSEBUTTONUP)
 {
 
 }
 
 int InstrumentManager::GetBrushSize()
 {
-  return mBrushSize;
+    return mBrushSize;
 }
 
 BrushType InstrumentManager::GetBrushType()
 {
-  return mBrushType;
+    return mBrushType;
 }
 
 ColorRGBA InstrumentManager::GetBrushColor()
 {
-  return mBrushColor;
+    return mBrushColor;
 }
 
 void InstrumentManager::SetBrushSize(int size)
 {
-  mBrushSize = size;
+    mBrushSize = size;
 }
 
 void InstrumentManager::SetBrushType(BrushType type)
 {
-  mBrushType = type;
+    mBrushType = type;
 }
 
 void InstrumentManager::SetBrushColor(ColorRGBA color)
 {
-  mBrushColor = color;
+    mBrushColor = color;
 }
 
 void InstrumentManager::InputBegan(SDL_Event e)
 {
-  mInstrumentState = SDL_MOUSEBUTTONDOWN;
-  printf("Mouse down!\n");
+    mInstrumentState = SDL_MOUSEBUTTONDOWN;
+    printf("Mouse down!\n");
 
-  Shape *newShape = new Shape();
-  mShapes.push_back(newShape);
+    Shape* newShape = new Shape();
+    mShapes.push_back(newShape);
 
-  currentShape = newShape;
-  currentShape->brushType = mBrushType;
+    currentShape = newShape;
+    currentShape->brushType = mBrushType;
 
-  GetCurrentInput(e);
+    GetCurrentInput(e);
 }
 
 void InstrumentManager::InputMoved(SDL_Event e)
 {
-  int x, y;
-  SDL_GetMouseState(&x, &y);
-  printf("Mouse moved at: %d, %d\n", x, y);
+    int x, y;
+    SDL_GetMouseState(&x, &y);
+    printf("Mouse moved at: %d, %d\n", x, y);
 
-  GetCurrentInput(e);
+    GetCurrentInput(e);
 }
 
 void InstrumentManager::InputEnded(SDL_Event e)
 {
-  mInstrumentState = SDL_MOUSEBUTTONUP;
-  printf("Mouse up!\n");
+    mInstrumentState = SDL_MOUSEBUTTONUP;
+    printf("Mouse up!\n");
 
-  currentShape->drawn = true;
+    currentShape->drawn = true;
 }
 
-const std::vector<Shape *>* InstrumentManager::GetActiveShapes()
+const std::vector<Shape*>* InstrumentManager::GetActiveShapes()
 {
-  return &mShapes;
+    return &mShapes;
 }
 
 void InstrumentManager::GetCurrentInput(SDL_Event e)
 {
-  int x, y, timestamp;
-  if (e.type == SDL_MOUSEBUTTONDOWN)
-  {
-    SDL_MouseButtonEvent mbe = e.button;
-    x = mbe.x;
-    y = mbe.y;
-    timestamp = mbe.timestamp;
-  }
-  else if (e.type == SDL_MOUSEMOTION)
-  {
-    SDL_MouseMotionEvent mme = e.motion;
-    x = mme.x;
-    y = mme.y;
-    timestamp = mme.timestamp;
-  }
+    int x, y, timestamp;
+    if (e.type == SDL_MOUSEBUTTONDOWN)
+    {
+        SDL_MouseButtonEvent mbe = e.button;
+        x = mbe.x;
+        y = mbe.y;
+        timestamp = mbe.timestamp;
+    }
+    else if (e.type == SDL_MOUSEMOTION)
+    {
+        SDL_MouseMotionEvent mme = e.motion;
+        x = mme.x;
+        y = mme.y;
+        timestamp = mme.timestamp;
+    }
 
-  ShapeBlock currentBlock;
-  currentBlock.x = x;
-  currentBlock.y = y;
-  currentBlock.brushColor = mBrushColor;
-  currentBlock.timestamp = timestamp;
-  currentBlock.brushSize = mBrushSize;
+    ShapeBlock currentBlock;
+    currentBlock.x = x;
+    currentBlock.y = y;
+    currentBlock.brushColor = mBrushColor;
+    currentBlock.timestamp = timestamp;
+    currentBlock.brushSize = mBrushSize;
 
-  currentShape->AddBlock(currentBlock);
+    currentShape->AddBlock(currentBlock);
 }
 
 void InstrumentManager::ClearAllShapes()
 {
-  for (auto shapes = mShapes.begin(); shapes != mShapes.end(); shapes++)
-  {
-    auto shape = (*shapes);
-    shape->Clear();
-    delete shape;
-  }
+    for (auto shapes = mShapes.begin(); shapes != mShapes.end(); shapes++)
+    {
+        auto shape = (*shapes);
+        shape->Clear();
+        delete shape;
+    }
 
-  mShapes.clear();
+    mShapes.clear();
 }
