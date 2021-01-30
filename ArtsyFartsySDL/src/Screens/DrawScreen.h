@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Screens\Screen.h"
+#include "Screen.h"
 #include <map>
 #include <vector>
 

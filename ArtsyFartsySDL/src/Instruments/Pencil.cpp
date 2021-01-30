@@ -1,62 +1,62 @@
 #include "Pencil.h"
+#include "../Shape.h"
 #include <SDL.h>
 #include <SDL2_gfxPrimitives.h>
-#include "../Shape.h"
 
-void Pencil::DrawShape(SDL_Renderer *renderer, Shape *shape, bool incremental)
+void Pencil::DrawShape(SDL_Renderer* renderer, Shape* shape, bool incremental)
 {
-  const std::vector<ShapeBlock *>* shapeBlocks = shape->GetBlocks();
+    const std::vector<ShapeBlock*>* shapeBlocks = shape->GetBlocks();
 
-  for (unsigned int blockIndex = 0; blockIndex < shapeBlocks->size(); blockIndex++)
-  {
-    ShapeBlock *firstBlock = shapeBlocks->at(blockIndex);
-    ShapeBlock *secondBlock = nullptr;
-    bool willDraw = firstBlock->drawn == false;
-
-    if (blockIndex + 1 < shapeBlocks->size())
+    for (unsigned int blockIndex = 0; blockIndex < shapeBlocks->size(); blockIndex++)
     {
-      secondBlock = shapeBlocks->at(blockIndex + 1);
-      if ((blockIndex == 0 && shapeBlocks->size() == 2))
-      {
-        willDraw = true;
-      }
-    }
-    else if (shapeBlocks->size() > 1)
-    {
-      continue;
-    }
+        ShapeBlock* firstBlock = shapeBlocks->at(blockIndex);
+        ShapeBlock* secondBlock = nullptr;
+        bool willDraw = firstBlock->drawn == false;
 
-    if (willDraw)
-    {
-      DrawBlock(renderer, firstBlock, secondBlock);
-      firstBlock->drawn = true;
+        if (blockIndex + 1 < shapeBlocks->size())
+        {
+            secondBlock = shapeBlocks->at(blockIndex + 1);
+            if ((blockIndex == 0 && shapeBlocks->size() == 2))
+            {
+                willDraw = true;
+            }
+        }
+        else if (shapeBlocks->size() > 1)
+        {
+            continue;
+        }
 
-      if (incremental == true)
-      {
-        break;
-      }
+        if (willDraw)
+        {
+            DrawBlock(renderer, firstBlock, secondBlock);
+            firstBlock->drawn = true;
+
+            if (incremental == true)
+            {
+                break;
+            }
+        }
     }
-  }
 }
 
-void Pencil::DrawBlock(SDL_Renderer *renderer, ShapeBlock *firstBlock, ShapeBlock *secondBlock)
+void Pencil::DrawBlock(SDL_Renderer* renderer, ShapeBlock* firstBlock, ShapeBlock* secondBlock)
 {
-  int x1 = firstBlock->x;
-  int y1 = firstBlock->y;
-  int x2 = firstBlock->x;
-  int y2 = firstBlock->y;
-  int size = firstBlock->brushSize / 2;
-  ColorRGBA color = firstBlock->brushColor;
+    int x1 = firstBlock->x;
+    int y1 = firstBlock->y;
+    int x2 = firstBlock->x;
+    int y2 = firstBlock->y;
+    int size = firstBlock->brushSize / 2;
+    ColorRGBA color = firstBlock->brushColor;
 
-  if (secondBlock != nullptr)
-  {
-    x2 = secondBlock->x;
-    y2 = secondBlock->y;
-    size = firstBlock->brushSize;
-  }
+    if (secondBlock != nullptr)
+    {
+        x2 = secondBlock->x;
+        y2 = secondBlock->y;
+        size = firstBlock->brushSize;
+    }
 
-  thickLineRGBA(renderer,
-    x1, y1, x2, y2,
-    size,
-    color.r, color.g, color.b, color.a);
+    thickLineRGBA(renderer,
+        x1, y1, x2, y2,
+        size,
+        color.r, color.g, color.b, color.a);
 }

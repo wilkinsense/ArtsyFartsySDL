@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ColorHelper.h"
 #include "InstrumentTypes.h"
+#include "../ColorHelper.h"
 #include <SDL_events.h>
 #include <time.h>
 #include <vector>

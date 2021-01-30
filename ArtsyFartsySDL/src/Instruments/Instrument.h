@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ColorHelper.h"
+#include "../ColorHelper.h"
 #include <SDL_types.h>
 
 struct SDL_Renderer;

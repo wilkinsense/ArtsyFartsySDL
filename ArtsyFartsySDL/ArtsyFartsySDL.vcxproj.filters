@@ -27,16 +27,7 @@
     <ClCompile Include="src\InputManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\InstrumentManager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\Shapes.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ScreenManager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DrawScreen.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Instruments\Pencil.cpp">
@@ -66,6 +57,15 @@
     <ClCompile Include="src\Instruments\Eraser.cpp">
       <Filter>src\Instruments</Filter>
     </ClCompile>
+    <ClCompile Include="src\Screens\DrawScreen.cpp">
+      <Filter>src\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Screens\ScreenManager.cpp">
+      <Filter>src\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Instruments\InstrumentManager.cpp">
+      <Filter>src\Instruments</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ColorHelper.h">
@@ -77,25 +77,7 @@
     <ClInclude Include="src\InputManager.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\InstrumentManager.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\InstrumentTypes.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\InstrumentWrapper.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\Shape.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ScreenManager.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DrawScreen.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Instrument.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Instruments\Pencil.h">
@@ -123,6 +105,24 @@
       <Filter>src\Buttons</Filter>
     </ClInclude>
     <ClInclude Include="src\Instruments\Eraser.h">
+      <Filter>src\Instruments</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Screens\DrawScreen.h">
+      <Filter>src\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Screens\ScreenManager.h">
+      <Filter>src\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Instruments\Instrument.h">
+      <Filter>src\Instruments</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Instruments\InstrumentManager.h">
+      <Filter>src\Instruments</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Instruments\InstrumentTypes.h">
+      <Filter>src\Instruments</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Instruments\InstrumentWrapper.h">
       <Filter>src\Instruments</Filter>
     </ClInclude>
   </ItemGroup>

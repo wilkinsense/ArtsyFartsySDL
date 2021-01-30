@@ -1,11 +1,11 @@
 #pragma once
-#include "../Instrument.h"
+#include "Instrument.h"
 
 struct ShapeBlock;
 
-class Pencil: public Instrument
+class Pencil : public Instrument
 {
 public:
-  void DrawShape(SDL_Renderer *renderer, Shape *shape, bool incremental = false);
-  void DrawBlock(SDL_Renderer *renderer, ShapeBlock *firstBlock, ShapeBlock *secondBlock);
+    void DrawShape(SDL_Renderer* renderer, Shape* shape, bool incremental = false);
+    void DrawBlock(SDL_Renderer* renderer, ShapeBlock* firstBlock, ShapeBlock* secondBlock);
 };

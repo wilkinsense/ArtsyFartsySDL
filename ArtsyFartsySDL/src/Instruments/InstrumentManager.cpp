@@ -1,6 +1,6 @@
-#include "HistoryManager.h"
 #include "InstrumentManager.h"
-#include "Shape.h"
+#include "../HistoryManager.h"
+#include "../Shape.h"
 #include <iostream>
 #include <SDL.h>
 

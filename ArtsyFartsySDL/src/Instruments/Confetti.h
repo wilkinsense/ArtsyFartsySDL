@@ -1,11 +1,12 @@
 #pragma once
-#include "../Instrument.h"
+
+#include "Instrument.h"
 
 struct ShapeBlock;
 
-class Confetti: public Instrument
+class Confetti : public Instrument
 {
 public:
-  void DrawShape(SDL_Renderer *renderer, Shape *shape, bool incremental = false);
-  void DrawBlock(SDL_Renderer *renderer, ShapeBlock *firstBlock, ShapeBlock *secondBlock);
+    void DrawShape(SDL_Renderer* renderer, Shape* shape, bool incremental = false);
+    void DrawBlock(SDL_Renderer* renderer, ShapeBlock* firstBlock, ShapeBlock* secondBlock);
 };

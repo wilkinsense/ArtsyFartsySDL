@@ -1,5 +1,5 @@
+#include "Screen.h"
 #include "ScreenManager.h"
-#include "Screens\Screen.h"
 #include <SDL.h>
 
 ScreenManager* ScreenManager::kInstance = nullptr;

@@ -80,18 +80,18 @@
     <ClCompile Include="src\Buttons\ColourButton.cpp" />
     <ClCompile Include="src\Buttons\InstrumentButton.cpp" />
     <ClCompile Include="src\Buttons\SelectableButton.cpp" />
-    <ClCompile Include="src\DrawScreen.cpp" />
     <ClCompile Include="src\HistoryManager.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
-    <ClCompile Include="src\InstrumentManager.cpp" />
     <ClCompile Include="src\Instruments\Confetti.cpp" />
     <ClCompile Include="src\Instruments\Eraser.cpp" />
+    <ClCompile Include="src\Instruments\InstrumentManager.cpp" />
     <ClCompile Include="src\Instruments\Pencil.cpp" />
     <ClCompile Include="src\Instruments\Spray.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\ScreenManager.cpp" />
+    <ClCompile Include="src\Screens\DrawScreen.cpp" />
     <ClCompile Include="src\Screens\ReplayScreen.cpp" />
     <ClCompile Include="src\Screens\Screen.cpp" />
+    <ClCompile Include="src\Screens\ScreenManager.cpp" />
     <ClCompile Include="src\Shapes.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -99,20 +99,20 @@
     <ClInclude Include="src\Buttons\InstrumentButton.h" />
     <ClInclude Include="src\Buttons\SelectableButton.h" />
     <ClInclude Include="src\ColorHelper.h" />
-    <ClInclude Include="src\DrawScreen.h" />
     <ClInclude Include="src\HistoryManager.h" />
     <ClInclude Include="src\InputManager.h" />
-    <ClInclude Include="src\Instrument.h" />
-    <ClInclude Include="src\InstrumentManager.h" />
     <ClInclude Include="src\Instruments\Confetti.h" />
     <ClInclude Include="src\Instruments\Eraser.h" />
+    <ClInclude Include="src\Instruments\Instrument.h" />
+    <ClInclude Include="src\Instruments\InstrumentManager.h" />
+    <ClInclude Include="src\Instruments\InstrumentTypes.h" />
+    <ClInclude Include="src\Instruments\InstrumentWrapper.h" />
     <ClInclude Include="src\Instruments\Pencil.h" />
     <ClInclude Include="src\Instruments\Spray.h" />
-    <ClInclude Include="src\InstrumentTypes.h" />
-    <ClInclude Include="src\InstrumentWrapper.h" />
-    <ClInclude Include="src\ScreenManager.h" />
+    <ClInclude Include="src\Screens\DrawScreen.h" />
     <ClInclude Include="src\Screens\ReplayScreen.h" />
     <ClInclude Include="src\Screens\Screen.h" />
+    <ClInclude Include="src\Screens\ScreenManager.h" />
     <ClInclude Include="src\Shape.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

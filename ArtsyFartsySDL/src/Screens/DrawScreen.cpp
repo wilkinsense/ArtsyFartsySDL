@@ -1,20 +1,20 @@
-#include "Buttons\ColourButton.h"
-#include "Buttons\InstrumentButton.h"
 #include "DrawScreen.h"
-#include "InputManager.h"
-#include "Instrument.h"
-#include "Instruments\Pencil.h"
-#include "Instruments\Confetti.h"
-#include "Instruments\Spray.h"
-#include "Instruments\Eraser.h"
-#include "InstrumentWrapper.h"
 #include "ScreenManager.h"
-#include "Shape.h"
+#include "../Buttons/ColourButton.h"
+#include "../Buttons/InstrumentButton.h"
+#include "../InputManager.h"
+#include "../Instruments/Confetti.h"
+#include "../Instruments/Eraser.h"
+#include "../Instruments/Instrument.h"
+#include "../Instruments/InstrumentWrapper.h"
+#include "../Instruments/Pencil.h"
+#include "../Instruments/Spray.h"
+#include "../Shape.h"
 #include <SDL2_gfxPrimitives.h>
 #include <SDL_image.h>
 
-#define MAX_X 0
-#define MIN_X -30
+constexpr auto MAX_X = 0;
+constexpr auto MIN_X = -30;
 
 DrawScreen::DrawScreen()
 {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "InstrumentManager.h"
-#include "InputManager.h"
+#include "../InputManager.h"
 
 class InstrumentWrapper
 {
