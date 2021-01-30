@@ -7,7 +7,7 @@ void Pencil::DrawShape(SDL_Renderer* renderer, Shape* shape, bool incremental)
 {
     const std::vector<ShapeBlock*>* shapeBlocks = shape->GetBlocks();
 
-    for (unsigned int blockIndex = 0; blockIndex < shapeBlocks->size(); blockIndex++)
+    for (uint32_t blockIndex = 0; blockIndex < shapeBlocks->size(); blockIndex++)
     {
         ShapeBlock* firstBlock = shapeBlocks->at(blockIndex);
         ShapeBlock* secondBlock = nullptr;
@@ -41,11 +41,11 @@ void Pencil::DrawShape(SDL_Renderer* renderer, Shape* shape, bool incremental)
 
 void Pencil::DrawBlock(SDL_Renderer* renderer, ShapeBlock* firstBlock, ShapeBlock* secondBlock)
 {
-    int x1 = firstBlock->x;
-    int y1 = firstBlock->y;
-    int x2 = firstBlock->x;
-    int y2 = firstBlock->y;
-    int size = firstBlock->brushSize / 2;
+    int32_t x1 = firstBlock->x;
+    int32_t y1 = firstBlock->y;
+    int32_t x2 = firstBlock->x;
+    int32_t y2 = firstBlock->y;
+    int32_t size = firstBlock->brushSize / 2;
     ColorRGBA color = firstBlock->brushColor;
 
     if (secondBlock != nullptr)

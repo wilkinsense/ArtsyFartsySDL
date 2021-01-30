@@ -80,7 +80,7 @@ void InstrumentManager::InputBegan(SDL_Event e)
 
 void InstrumentManager::InputMoved(SDL_Event e)
 {
-    int x, y;
+    int x = 0, y = 0;
     SDL_GetMouseState(&x, &y);
     printf("Mouse moved at: %d, %d\n", x, y);
 
@@ -102,7 +102,7 @@ const std::vector<Shape*>* InstrumentManager::GetActiveShapes()
 
 void InstrumentManager::GetCurrentInput(SDL_Event e)
 {
-    int x, y, timestamp;
+    int x = 0, y = 0, timestamp = 0;
     if (e.type == SDL_MOUSEBUTTONDOWN)
     {
         SDL_MouseButtonEvent mbe = e.button;

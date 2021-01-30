@@ -1,10 +1,10 @@
 #pragma once
 
-enum BrushType
+enum class BrushType
 {
-    BRUSHTYPE_PENCIL,
-    BRUSHTYPE_CONFETTI,
-    BRUSHTYPE_SPRAY,
-    BRUSHTYPE_ERASER,
-    BRUSHTYPE_COUNT
+    PENCIL,
+    CONFETTI,
+    SPRAY,
+    ERASER,
+    COUNT
 };

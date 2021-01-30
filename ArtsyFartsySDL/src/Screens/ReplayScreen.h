@@ -5,6 +5,7 @@
 #include <map>
 #include <SDL_types.h>
 
+enum class BrushType;
 class Shape;
 
 class ReplayScreen : public Screen
@@ -19,7 +20,7 @@ public:
     void Draw(SDL_Renderer* renderer);
 
 protected:
-    std::map<int, Instrument*> mInstruments;
+    std::map<BrushType, Instrument*> mInstruments;
 
     Uint32 mLastTimestamp;
     Uint32 mCurrentTimestamp;

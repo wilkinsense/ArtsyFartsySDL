@@ -40,24 +40,24 @@ public:
     static void ChangeToPen()
     {
         InstrumentManager* im = InstrumentManager::GetInstance();
-        im->SetBrushType(BRUSHTYPE_PENCIL);
+        im->SetBrushType(BrushType::PENCIL);
     }
 
     static void ChangeToConfetti()
     {
         InstrumentManager* im = InstrumentManager::GetInstance();
-        im->SetBrushType(BRUSHTYPE_CONFETTI);
+        im->SetBrushType(BrushType::CONFETTI);
     }
 
     static void ChangeToSpray()
     {
         InstrumentManager* im = InstrumentManager::GetInstance();
-        im->SetBrushType(BRUSHTYPE_SPRAY);
+        im->SetBrushType(BrushType::SPRAY);
     }
 
     static void ChangeToEraser()
     {
         InstrumentManager* im = InstrumentManager::GetInstance();
-        im->SetBrushType(BRUSHTYPE_ERASER);
+        im->SetBrushType(BrushType::ERASER);
     }
 };

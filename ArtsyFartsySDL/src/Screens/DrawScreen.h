@@ -4,6 +4,7 @@
 #include <map>
 #include <vector>
 
+enum class BrushType;
 class ColourButton;
 class Instrument;
 class InstrumentButton;
@@ -24,7 +25,7 @@ public:
     void Clear();
 
 protected:
-    std::map<int, Instrument*> mInstruments;
+    std::map<BrushType, Instrument*> mInstruments;
 
     SDL_Texture* mButtonTexture;
     SDL_Texture* mPencilTexture;
@@ -35,14 +36,14 @@ protected:
     std::vector<ColourButton*> mButtons;
     InstrumentButton* mPencilButton;
     InstrumentButton* mSprayButton;
-    std::map<int, InstrumentButton*> mInstrumentButtons;
+    std::map<BrushType, InstrumentButton*> mInstrumentButtons;
 
     void CheckInput(SDL_Event e);
-    bool IsWithinButton(int x, int y, ColourButton** button);
+    bool IsWithinButton(int32_t x, int32_t y, ColourButton** button);
 
-    int mButtonsX, mButtonsY;
-    int mButtonsOffsetX, mButtonsOffsetY;
-    bool mWithinButtons;
+    int32_t mButtonsX = 0, mButtonsY = 0;
+    int32_t mButtonsOffsetX = 0, mButtonsOffsetY = 0;
+    bool mWithinButtons = false;
 
-    SDL_Texture* mBackBuffer;
+    SDL_Texture* mBackBuffer = nullptr;
 };

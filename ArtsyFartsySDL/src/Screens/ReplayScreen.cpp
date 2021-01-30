@@ -12,12 +12,16 @@
 #include "../Shape.h"
 #include <vector>
 
-ReplayScreen::ReplayScreen()
+ReplayScreen::ReplayScreen() 
+    : mBlockIndex(0)
+    , mCurrentTimestamp(0)
+    , mLastTimestamp(0)
+    , mShapeIndex(0)
 {
-    mInstruments.insert(std::pair<int, Instrument*>(BRUSHTYPE_PENCIL, new Pencil()));
-    mInstruments.insert(std::pair<int, Instrument*>(BRUSHTYPE_CONFETTI, new Confetti()));
-    mInstruments.insert(std::pair<int, Instrument*>(BRUSHTYPE_SPRAY, new Spray()));
-    mInstruments.insert(std::pair<int, Instrument*>(BRUSHTYPE_ERASER, new Eraser()));
+    mInstruments.insert(std::pair<BrushType, Instrument*>(BrushType::PENCIL, new Pencil()));
+    mInstruments.insert(std::pair<BrushType, Instrument*>(BrushType::CONFETTI, new Confetti()));
+    mInstruments.insert(std::pair<BrushType, Instrument*>(BrushType::SPRAY, new Spray()));
+    mInstruments.insert(std::pair<BrushType, Instrument*>(BrushType::ERASER, new Eraser()));
 }
 
 ReplayScreen::~ReplayScreen()
@@ -90,7 +94,7 @@ void ReplayScreen::Draw(SDL_Renderer* renderer)
                     mLastTimestamp = mCurrentTimestamp;
                 }
             }
-            if (blocks->size() == 1)
+            else if (blocks->size() == 1)
             {
                 willDraw = true;
             }
